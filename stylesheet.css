@@ -42,8 +42,8 @@
 		position: fixed;
 		display: table;
 		width: 98%;
-		height: 18px;
-		margin: 1%;
+		height: 3%;
+		margin: 0.5% 1%;
 	}
 	
 	input[type=radio], input[type=checkbox]{
@@ -73,11 +73,11 @@
 	input[type=checkbox]:checked + label::before{ content: "\2611"; }
 	
 	div#main{
+		position: absolute;
 		display: flex;
-		position: relative;
 		width: 300%;
 		height: 95%;
-		margin-top: 22px;
+		margin-top: 3.5%;
 		margin-left: -200%;
 	}
 	
@@ -152,10 +152,10 @@
 	div#levels .hand .points{ background-color: #2222ff; }
 	div#levels .hand .multi{ background-color: #ff5500; }
 	
-	div#levels #levels_header{ height: 2.5%; }
+	div#levels #levels_header{ height: 4%; }
 	div#levels #levels_header span{
 		background-color: #cccccc;
-		font-size: 6px;
+		font-size: 7px;
 		font-weight: normal;
 		color: #000000;
 		text-shadow: none;
@@ -185,7 +185,7 @@
 		place-items: center;
 		justify-content: center;
 		gap: 0.5%;
-		padding: 0.25%;
+		padding: 0.2%;
 		width: 32.66%;
 		margin: 0 0.33%;
 		height: 5%;
@@ -228,6 +228,7 @@
 	div#levels #tokens .label{ }
 	div#levels #tokens .button{ width: 9.5%; }
 	div#levels #tokens .counter{ }
+	div#levels #tokens .counter.negative{ color: #ff0000; }
 	
 	div#levels #max_hands.active{
 		background-image: linear-gradient(#009999, #006666 50%);
@@ -371,7 +372,7 @@
 		bottom: 0;
 		BORDER: 1PX SOLID BLUE;
 	}
-	div#game div#game_footer span{
+	div#game div#game_footer div{
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -384,38 +385,29 @@
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
 	}
-	div#game div#game_footer span#cards{
+	div#game div#game_footer div#cards{
 		background-image: linear-gradient(#990099, #660066 50%);
 		
 	}
-	div#game div#game_footer span#dice{
+	div#game div#game_footer div#dice{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 		font-size: 28px;
 		color: #000000;
 		text-shadow: none;
 	}
-	div#game div#game_footer span#dice::before{ content: "\2684"; }
+	div#game div#game_footer div#dice::before{ content: "\2684"; }
 	
-	div#game div#game_footer span#discards_left{
+	div#game div#game_footer div#discards_left{
 		background-image: linear-gradient(#999900, #666600 50%);
 	}
-	div#game div#game_footer span#hands_left{
+	div#game div#game_footer div#hands_left{
 		background-image: linear-gradient(#009999, #006666 50%);
 	}
 	
-	div#game div#game_footer span#hands_button_down, div#game div#game_footer span#hands_button_up{
+	div#game div#game_footer div#hands_button_down, div#game div#game_footer div#hands_button_up{
 		background-image: linear-gradient(#00ee00, #006600 50%);
 	}
 	
-	div#game div#counters span#discards_button_down, div#game div#counters span#discards_button_up{
-		background-image: linear-gradient(#ee0000, #660000 50%);
-	}
-	
-	div#game div#counters span.button.disabled{
-		background-image: linear-gradient(#eeeeee, #dddddd 50%) !important;
-	}
-	div#game div#counters span#hands_counter{ color: #006600; }
-	div#game div#counters span#discards_counter{ color: #660000; }
 	
 	/* STYLES FOR OPTIONS SCREEN */
 	div#config{
@@ -437,8 +429,7 @@
 		mask:
 			linear-gradient(#ffff00 0 0) padding-box,
 			linear-gradient(#ff0000 0 0);
-		mask-composite: exclude;
-		color: white;
+		color: #eeeeee;
 		font-size: 18px;
 		font-weight: bold;
 		text-shadow: 1px 1px 2px #000000;

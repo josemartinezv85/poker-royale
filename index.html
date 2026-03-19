@@ -224,10 +224,22 @@
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
 			
 			<div id="game_footer">
-				<span id="cards"></span>
-				<span id="dice"></span>
-				<span id="discards_left"></span>
-				<span id="hands_left"></span>
+				<div id="cards">
+					<span class="counter"></span>
+					<span class="button down">-</span>
+					<span class="button up">+</span>
+				</div>
+				<div id="dice"></div>
+				<div id="discards_left">
+					<span class="counter"></span>
+					<span class="button down">-</span>
+					<span class="button up">+</span>
+				</div>
+				<div id="hands_left">
+					<span class="counter"></span>
+					<span class="button down">-</span>
+					<span class="button up">+</span>
+				</div>
 			</div>
 		</div>
 		
@@ -241,9 +253,15 @@
 				<span class="button up" onClick="change_rounds(+1);">+</span>
 			</div>
 			<div class="options">
-				<span class="label">Partida sin figuras:</span>
+				<span class="label">Variante sin figuras:</span>
 				<span></span>
 				<span id="nofigures_checkbox"><input type="checkbox" name="nofigures" id="nofigures" /><label for="nofigures"></label></span>
+				<span></span>
+			</div>
+			<div class="options">
+				<span class="label">Variante equilibrada:</span>
+				<span></span>
+				<span id="balanced_checkbox"><input type="checkbox" name="balanced" id="balanced" /><label for="balanced"></label></span>
 				<span></span>
 			</div>
 			<div class="options">
