@@ -419,22 +419,25 @@
 	
 	div#game div#game_footer div#cards{
 		background-image: linear-gradient(#990099, #660066 50%);
+		border: 1px solid #660066;
 	}
 	div#game div#game_footer div#cards .counter::before{ content: "\1f0a1  "; }
 	div#game div#game_footer div#dice{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
+		border: 1px solid #cccccc;
 		font-size: 36px;
 		color: #000000;
 		text-shadow: none;
-		border: 1px solid #cccccc;
 	}
 	div#game div#game_footer div#dice::before{ content: "\2684"; }
 	
 	div#game div#game_footer div#discards_left{
 		background-image: linear-gradient(#999900, #666600 50%);
+		border: 1px solid #666600;
 	}
 	div#game div#game_footer div#hands_left{
 		background-image: linear-gradient(#009999, #006666 50%);
+		border: 1px solid #006666;
 	}
 	
 	div#game div#game_footer div#discards_left .counter::before{ content: "\2718  "; }

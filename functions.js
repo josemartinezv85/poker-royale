@@ -50,7 +50,7 @@
 	var plays = new Array();
 	var max_hands, max_discards;
 	var hands_left, discards_left;
-	var round, blind, goal, total_points;
+	var round, blind, goal, score;
 	var played_hands, not_played_hands;
 	var played_discards, not_played_discards;
 	var defeated_blinds, not_defeated_blinds;
@@ -216,6 +216,7 @@
 	}
 	
 	function refresh(){
+		clearTimeout(timeout);
 		$(".active").removeClass("active");
 		
 		for(var i = 1; i <= 12; i++){
@@ -257,8 +258,9 @@
 			timeout = setTimeout(function(){
 				$("#hand_" + hand).attr("onClick", "change_level(" + hand + ", 0);");
 			}, 1);
+			
+			save_game();
 		}
-		save_game();
 	}
 	
 	function change_max_hands(inc){
@@ -347,7 +349,7 @@
 	
 	function change_cards(inc){
 		clearTimeout(timeout);
-		if(!$("#game #game_footer #cards").hasClass("active")){
+		if((!$("#game #game_footer #cards").hasClass("active")) || (!inc)){
 			refresh();
 			$("#game #game_footer #cards").addClass("active");
 			
@@ -364,7 +366,7 @@
 			$("#game #game_footer #cards").removeAttr("onClick");
 			
 			$("#game #game_footer #cards .counter").text((nofigures ? 40 : 50) + cards);
-			$("#levels #cards").text(cards);
+			$("#levels #added_cards").text(cards);
 			
 			$("#game #game_footer #cards").removeClass("active");
 			timeout = setTimeout(function(){
@@ -376,7 +378,7 @@
 	
 	function change_hands(inc){
 		clearTimeout(timeout);
-		if(!$("#game_footer #hands_left").hasClass("active")){
+		if((!$("#game_footer #hands_left").hasClass("active")) || (!inc)){
 			refresh();
 			$("#game_footer #hands_left").addClass("active");
 			
@@ -404,7 +406,7 @@
 	
 	function change_discards(inc){
 		clearTimeout(timeout);
-		if(!$("#game_footer #discards_left").hasClass("active")){
+		if((!$("#game_footer #discards_left").hasClass("active")) || (!inc)){
 			refresh();
 			$("#game_footer #discards_left").addClass("active");
 			
@@ -515,6 +517,7 @@
 				
 				$("#play #play_discard").addClass("disabled");
 				$("#game_footer #discards_left .counter").text(discards_left);
+				if(!discards_left) $("#game_footer #discards_left .button.down").addClass("disabled");
 				$("#levels .stats #played_discards").text(played_discards);
 			
 				$("#config #nofigures").prop("disabled", true);
