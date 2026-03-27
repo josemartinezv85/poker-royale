@@ -301,8 +301,8 @@
 		position: absolute;
 		top: 0;
 		margin: 0 auto;
-		height: 98%;
-		width: 32%;
+		height: 100%;
+		width: 33.34%;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-template-rows: 22% 22% 22% 20% 10%;
@@ -329,6 +329,7 @@
 		height: 100%;
 		border: 1px solid #cccccc;
 		font-size: 80px;
+		border-radius: 6px;
 	}
 	div#game div#dice_form div.die.die_1{ background: url("die_1.png") center center/50% no-repeat; }
 	div#game div#dice_form div.die.die_2{ background: url("die_2.png") center center/50% no-repeat; }
@@ -364,8 +365,8 @@
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: 25%, cover;
-		border: 1px solid #004400;
-		grid-row: 4;*/
+		border: 1px solid #004400; */
+		grid-row: 4;
 	}
 	div#game div#dice_form span#roll::before{ content: "\1f5d8"; font-size: 68px; }
 	div#game div#dice_form span#roll.disabled{
