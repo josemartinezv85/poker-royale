@@ -56,23 +56,27 @@
 		font-weight: bold;
 		vertical-align: middle;
 	}
+	input[type=checkbox] + label{
+		font-size: 14px;
+		border-radius: 6px;
+		text-shadow: 1px 1px 10px #666666;
+	}
 	input[type=radio]#header_levels + label{ border-radius: 5px 0 0 5px; }
 	input[type=radio]#header_game + label{ width: 33.34%; }
 	input[type=radio]#header_config + label{ border-radius: 0 5px 5px 0; }
 	
 	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
-		color: #eeeeee;
 		background-image: linear-gradient(#ff0000, #660000 50%);
 		border: 1px solid #660000;
+		color: #eeeeee;
+		text-shadow: 1px 1px 10px #000000;
 	}
 	input[type=radio]:disabled + label, input[type=checkbox]:disabled + label{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 		border: 1px solid #dddddd;
+		color: #aaaaaa;
 	}
-	input[type=checkbox] + label{
-		font-size: 14px;
-		border-radius: 6px;
-	}
+	
 	input[type=checkbox] + label::after{ content: " \2610"; }
 	input[type=checkbox]:checked + label::after{ content: " \2611"; }
 	
@@ -96,7 +100,7 @@
 	}
 	
 	div#main{
-		position: relative;
+		position: absolute;
 		display: flex;
 		width: 300%;
 		height: 95%;
@@ -293,6 +297,85 @@
 	}
 	div#game div#game_header span#goal{ width: 33.34%; }
 	
+	div#game div#dice_form{
+		position: absolute;
+		top: 0;
+		margin: 0 auto;
+		height: 98%;
+		width: 32%;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 22% 22% 22% 20% 10%;
+		grid-gap: 1%;
+		align-items: center;
+		background-color: #eeeeee;
+		border: 3px solid #cccccc;
+		border-radius: 3px;
+		box-shadow: 3px 3px 3px #666666;
+		z-index: 1;
+		transition: all 0.25s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+	}
+	div#game div#dice_form.hidden{
+		opacity: 0;
+		scale: 25%;
+		transform: translateX(-25%) translateY(200%);
+		visibility: hidden;
+	}
+	
+	div#game div#dice_form div.die{
+		height: 100%;
+		border: 1px solid #cccccc;
+		font-size: 80px;
+	}
+	div#game div#dice_form div.die.die_1{ background: url("die_1.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_2{ background: url("die_2.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_3{ background: url("die_3.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_4{ background: url("die_4.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_5{ background: url("die_5.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_6{ background: url("die_6.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_7{ background: url("die_1.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_8{ background: url("die_2v2.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_9{ background: url("die_3v2.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_10{ background: url("die_4.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_11{ background: url("die_5.png") center center/25% no-repeat; }
+	div#game div#dice_form div.die.die_12{ background: url("die_6v2.png") center center/25% no-repeat; }
+	
+	div#game div#dice_form div.die.add{
+		background: url("die_add.png"), linear-gradient(#aaffaa, #44ff44 50%);;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 25%, cover;
+	}
+	div#game div#dice_form div.die.active{
+		background-image: url("die_remove.png"), linear-gradient(#ff0000, #660000 50%);
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: 25%, cover;
+	}
+	
+	div#game div#dice_form span.button{	grid-column: 1/4; }
+	
+	div#game div#dice_form span#roll{
+		background-image: linear-gradient(#009900, #004400 50%);
+		border: 1px solid #004400;
+		font-size: 60px !important;
+		grid-row: 4;
+	}
+	div#game div#dice_form span#roll.disabled{
+		background-image: linear-gradient(#eeeeee, #dddddd 50%);
+		border: 1px solid #dddddd;
+		color: #aaaaaa;
+	}
+	div#game div#dice_form span#close{
+		grid-column: 1 / 4;
+		grid-row: 5;
+	}
+	
+	div#game div#played{}
+	
 	div#game div#played div.discard{
 		position: relative;
 		display: flex;
@@ -341,6 +424,7 @@
 	div#game form #play_hand{
 		grid-column: 1;
 		grid-row: 1;
+		font-size: 42px;
 	}
 	
 	div#game form #play_points{
@@ -374,6 +458,8 @@
 	div#game form #play_discard.disabled, div#game form #play_confirm.disabled{
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 	}
+	
+	
 	
 	div#game div#next_round{
 		position: relative;
@@ -525,7 +611,7 @@
 		font-weight: bold;
 		padding: auto;
 		color: #eeeeee;
-		text-shadow: 0 0 8px #000000;
+		text-shadow: 0 0 10px #000000;
 	}
 	div#config div#new_game span{
 		display: table-cell;
@@ -536,7 +622,7 @@
 	div#config div#new_game span.red, div#config div#new_game span.black{
 		width: 15%;
 		font-size: 30px;
-		text-shadow: 0 0 8px #eeeeee;
+		text-shadow: 0 0 10px #eeeeee;
 		padding-bottom: 6px;
 	}
 	div#config div#new_game span.red { color: #ff0000; }

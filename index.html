@@ -212,16 +212,18 @@
 			<div id="played"></div>
 			
 			<form id="play">
-				<div id="play_hand" onClick="select_hand(1);">Mano</div>
+				<div id="play_hand" onClick="select_hand(1);">&#128401;</div>
 				<div id="play_points" onClick="open_points_form(1);">0</div>
 				<div id="play_multi" onClick="open_multi_form(1);">0</div>
 				<div id="play_total">0</div>
-				<div id="play_reset" onClick="reset(1);">&#8634;</div>
+				<div id="play_reset" onClick="reset(1);">&#10226;</div>
 				<div id="play_discard" class="disabled" onClick="play_discard();">&#10008;</div>
 				<div id="play_confirm" class="disabled" onClick="play_hand();">&#10004;</div>
 			</form>
 			
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
+			
+			
 			
 			<div id="game_footer">
 				<div id="cards" onClick="change_cards(0);">
@@ -229,7 +231,7 @@
 					<span class="button down" onClick="change_cards(-1);">-</span>
 					<span class="button up" onClick="change_cards(1);">+</span>
 				</div>
-				<div id="dice"></div>
+				<div id="dice" onClick="$('#dice_form').removeClass('hidden');"></div>
 				<div id="discards_left" onClick="change_discards(0);">
 					<span class="counter"></span>
 					<span class="button down" onClick="change_discards(-1);">-</span>
@@ -241,6 +243,15 @@
 					<span class="button up" onClick="change_hands(1);">+</span>
 				</div>
 			</div>
+			
+			<div id="dice_form" class="hidden">
+				<div id="die_1" class="die die_1"></div>
+				<div id="die_add" class="die add" onClick="add_die();"></div>
+			
+				<span class="button" id="roll">&#128472;</span>
+				<span class="button" id="close" onClick="$('#dice_form').addClass('hidden');">Cerrar</span>
+			</div>
+			
 		</div>
 		
 		<div id="config">
@@ -253,13 +264,13 @@
 				<span class="button up" onClick="change_suddeath(+1);">+</span>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras&nbsp;</label>
+				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada&nbsp;</label>
+				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada</label>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame">Guardar partida (usa cookies)&nbsp;</label>
+				<input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>
 			</div>
 			
 			<div id="new_game" onClick="new_game();">

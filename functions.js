@@ -27,6 +27,7 @@
 	// &#10227; // flecha relanzar
 	// &#128472; reroll
 	// &plusmn; SÍMBOLO MÁS/MENOS
+	// &#128369; &#x1f571; CALAVERA CON HUESOS
 	
 	const points = new Array();
 	const multi = new Array();
@@ -56,6 +57,7 @@
 	var defeated_blinds, not_defeated_blinds;
 	var increased_levels;
 	var cards;
+	var dice;
 	var tokens;
 	var suddeath;
 	var nofigures, balanced;
@@ -95,6 +97,7 @@
 			nofigures = false;		// BORRAR
 			balanced = false;		// BORRAR
 			cards = 0				// BORRAR
+			dice = 1;				// BORRAR
 			tokens = 4;				// BORRAR
 			
 			$("#config #savegame").prop("checked", true);
@@ -120,6 +123,7 @@
 			nofigures = $("#nofigures").is(":checked");
 			balanced = $("#balanced").is(":checked");
 			cards = 0;
+			dice = 1;
 			tokens = 4;
 			
 			for(var i = 12; i >= 1; i--){
@@ -150,8 +154,13 @@
 		$("#levels .stats #increased_levels").text(increased_levels);
 		
 		$("#game #game_header #round").html("Ronda <b>1</b>");
-		$("#game #game_header #blind").text("Ciega PEQUEÑA");
+		refresh_game_header();
 		$("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
+		
+		//$("#game #dice_form").hide();
+		//$("#game #hands_form").hide();
+		//$("#game #points_form").hide();
+		//$("#game #multi_form").hide();
 		
 		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
@@ -254,8 +263,8 @@
 			$("#hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
 			$("#increased_levels").text(increased_levels);
 			
-			$("#hand_" + hand).removeClass("active");
 			timeout = setTimeout(function(){
+			$("#hand_" + hand).removeClass("active");
 				$("#hand_" + hand).attr("onClick", "change_level(" + hand + ", 0);");
 			}, 1);
 			
@@ -337,6 +346,15 @@
 		save_game();
 	}
 	
+	function refresh_game_header(){
+		switch(blind - (3 * (round - 1))){
+			case 1:	$("#game #game_header #blind").html("&#128922; Ciega PEQUEÑA"); break;
+			case 2: $("#game #game_header #blind").html("&#128923; Ciega GRANDE"); break;
+			case 3:	$("#game #game_header #blind").html("&#128924; Ciega <b>JEFE</b>"); break;
+			default: break;
+		}
+	}
+	
 	function change_boss(){
 		if(blind - (3 * (round - 1)) == 3){
 			clearTimeout(timeout);
@@ -365,7 +383,7 @@
 			
 			$("#game #game_footer #cards").removeAttr("onClick");
 			
-			$("#game #game_footer #cards .counter").text((nofigures ? 40 : 50) + cards);
+			$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 			$("#levels #added_cards").text(cards);
 			
 			$("#game #game_footer #cards").removeClass("active");
@@ -433,7 +451,7 @@
 	}
 	
 	function change_suddeath(inc){
-		if(Math.trunc((blind - 0.1) / 3) + 1 <= suddeath){
+		if((!played_hands) && (!played_discards)){
 			if(((inc < 0) && (suddeath > 1)) || ((inc > 0) && (suddeath < 12))) suddeath += inc;
 			if((inc < 0) && (suddeath == 1)) $("#config .button.down").addClass("disabled");
 			else if ((inc > 0) && (suddeath == 12)) $("#config .button.up").addClass("disabled");
@@ -448,18 +466,13 @@
 
 	function next_blind(){
 		blind++;
-		var round = Math.trunc((blind + 2) / 3);
+		round = Math.trunc((blind + 2) / 3);
 		$("#game #game_header #round").html("Ronda <b>" + round + "</b>");
 		
 		var base_points = (suddeath >= round) ? 300 * (2 ** (round - 1)) : 300 * (2 ** (round - 1)) + 100 * (2 ** (round - 1) * round - 1) - 100 * (round - 1);
 		goal = base_points * (0.5 * (blind - (3 * (round - 1)) + 1));
 		
-		switch(blind - (3 * (round - 1))){
-			case 1:	$("#game #game_header #blind").text("Ciega PEQUEÑA"); break;
-			case 2: $("#game #game_header #blind").text("Ciega GRANDE"); break;
-			case 3:	$("#game #game_header #blind").html("Ciega <b>JEFE</b>"); break;
-			default: break;
-		}
+		refresh_game_header();
 		
 		if(suddeath >= round) $("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
 		else{
@@ -469,6 +482,9 @@
 			$("#config #rounds_down").addClass("disabled");
 			$("#config #rounds_up").addClass("disabled");
 		}
+		
+		$("#game #played div").animate({ height: "0" }, 250);
+		setTimeout(function(){ $("#game #played").html(""); }, 250);
 		
 		save_game();
 	}
@@ -519,7 +535,8 @@
 				$("#game_footer #discards_left .counter").text(discards_left);
 				if(!discards_left) $("#game_footer #discards_left .button.down").addClass("disabled");
 				$("#levels .stats #played_discards").text(played_discards);
-			
+				
+				$("#config .button").addClass("disabled");
 				$("#config #nofigures").prop("disabled", true);
 				$("#config #balanced").prop("disabled", true);
 				save_game();
@@ -529,4 +546,34 @@
 	
 	function play_hand(){
 	
+	}
+	
+	function add_die(){
+		refresh();
+		$("#game #die_" + dice).removeAttr("onClick");
+		dice++;
+		
+		$("#game #die_" + (dice - 1)).after("<div id='die_" + dice + "' class='die die_" + (1 + Math.floor(Math.random() * 12)) + "' onClick='remove_die();'></div>");
+		
+	//	if(dice == 9){}
+	}
+	
+	function remove_die(){
+		clearTimeout(timeout);
+		if(!$("#game #die_" + dice).hasClass("active")){
+			refresh();
+			
+			$("#game #die_" + dice).addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#game #die_" + dice).removeClass("active");
+			}, delay);
+		}
+		else{
+			$("#game #die_" + dice).remove();
+			dice--;
+			if(dice > 1) $("#game #die_" + dice).attr("onClick", "remove_die()");
+			
+			save_game();
+		}
 	}
