@@ -554,8 +554,6 @@
 		dice++;
 		
 		$("#game #die_" + (dice - 1)).after("<div id='die_" + dice + "' class='die die_" + (1 + Math.floor(Math.random() * 12)) + "' onClick='remove_die();'></div>");
-		
-	//	if(dice == 9){}
 	}
 	
 	function remove_die(){
@@ -575,5 +573,11 @@
 			if(dice > 1) $("#game #die_" + dice).attr("onClick", "remove_die()");
 			
 			save_game();
+		}
+	}
+	
+	function roll_dice{
+		for(var i = 1; i <= dice; i++){
+			
 		}
 	}

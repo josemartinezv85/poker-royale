@@ -212,7 +212,7 @@
 			<div id="played"></div>
 			
 			<form id="play">
-				<div id="play_hand" onClick="select_hand(1);">&#128401;</div>
+				<div id="play_hand" onClick="select_hand(1);"></div>
 				<div id="play_points" onClick="open_points_form(1);">0</div>
 				<div id="play_multi" onClick="open_multi_form(1);">0</div>
 				<div id="play_total">0</div>
@@ -248,8 +248,8 @@
 				<div id="die_1" class="die die_1"></div>
 				<div id="die_add" class="die add" onClick="add_die();"></div>
 			
-				<span class="button" id="roll"></span>
 				<span class="button" id="close" onClick="$('#dice_form').addClass('hidden');">Cerrar</span>
+				<span class="button" id="roll" onClick="roll_dice();">Lanzar</span>
 			</div>
 			
 		</div>
@@ -264,13 +264,13 @@
 				<span class="button up" onClick="change_suddeath(+1);">+</span>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras</label>
+				<input type="checkbox" name="nofigures" id="nofigures" onChange="$('#cards .counter').text((this.checked) ? 40 : 52);" /><label for="nofigures">Variante sin figuras&nbsp;</label>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada</label>
+				<input type="checkbox" name="balanced" id="balanced" /><label for="balanced">Variante equilibrada&nbsp;</label>
 			</div>
 			<div class="options">
-				<input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame">Guardar partida (usa cookies)</label>
+				<input type="checkbox" name="savegame" id="savegame" onClick="save_game();" /><label for="savegame">Guardar partida (usa cookies)&nbsp;</label>
 			</div>
 			
 			<div id="new_game" onClick="new_game();">
