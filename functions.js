@@ -576,7 +576,7 @@
 		}
 	}
 	
-	function roll_dice{
+	function roll_dice(){
 		for(var i = 1; i <= dice; i++){
 			
 		}
