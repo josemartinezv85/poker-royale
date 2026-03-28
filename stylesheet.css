@@ -468,7 +468,7 @@
 		width: 33.34%;
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 22% 22% 22% 20% 10%;
+		grid-template-rows: 22% 22% 22% 18% 12%;
 		grid-gap: 1%;
 		align-items: center;
 		background-color: #eeeeee;
@@ -506,6 +506,7 @@
 	div#game div#dice_form div.die.die_11{ background: url("die_5.png") center center/50% no-repeat; }
 	div#game div#dice_form div.die.die_12{ background: url("die_6v2.png") center center/50% no-repeat; }
 	
+	div#game div#dice_form div.die.rolling{ background-color: #aaaaaa; }
 	div#game div#dice_form div.die.add{
 		background: url("die_add.png"), linear-gradient(#aaffaa, #44ff44 50%);
 		background-repeat: no-repeat;
@@ -521,10 +522,9 @@
 	
 	div#game div#dice_form span.button{}
 	
-	div#game div#dice_form span#close{ grid-row: 5; }
 	div#game div#dice_form span#roll{
-		grid-column: 2 / 4;
-		grid-row: 5;
+		grid-column: 1 / 4;
+		grid-row: 4;
 		background-image: linear-gradient(#009900, #004400 50%);
 		font-weight: bold;
 		color: #eeeeee;
@@ -535,6 +535,14 @@
 		background-image: linear-gradient(#eeeeee, #dddddd 50%);
 		border: 1px solid #dddddd;
 		color: #dddddd;
+	}
+	div#game div#dice_form span#big_die_button{
+		grid-row: 5;
+		background-image: radial-gradient(#e0e0e0, #808080, #e0e0e0, #808080);
+	}
+	div#game div#dice_form span#close{
+		grid-row: 5;
+		grid-column: 2 / 4;
 	}
 	
 	/* STYLES FOR OPTIONS SCREEN */

@@ -557,27 +557,48 @@
 	}
 	
 	function remove_die(){
-		clearTimeout(timeout);
-		if(!$("#game #die_" + dice).hasClass("active")){
-			refresh();
+		if(!$("#game #die_" + dice).hasClass("rolling")){
+			clearTimeout(timeout);
+			if(!$("#game #die_" + dice).hasClass("active")){
+				refresh();
 			
-			$("#game #die_" + dice).addClass("active");
-			
-			timeout = setTimeout(function(){
-				$("#game #die_" + dice).removeClass("active");
-			}, delay);
-		}
-		else{
-			$("#game #die_" + dice).remove();
-			dice--;
-			if(dice > 1) $("#game #die_" + dice).attr("onClick", "remove_die()");
-			
-			save_game();
+				$("#game #die_" + dice).addClass("active");
+				
+				timeout = setTimeout(function(){
+					$("#game #die_" + dice).removeClass("active");
+				}, delay);
+			}
+			else{
+				$("#game #die_" + dice).remove();
+				dice--;
+				if(dice > 1) $("#game #die_" + dice).attr("onClick", "remove_die();");
+				
+				save_game();
+			}
 		}
 	}
 	
+	function roll_die(die, times){
+		if(times){
+			$("#game #die_" + die).addClass("rolling");
+			setTimeout(function(){
+				$("#game #die_" + die).attr("class", "die die_" + (1 + Math.floor(Math.random() * 12)));
+				roll_die(die, times - 1);
+			}, 10 * (20 - times));
+		}
+		else $("#game #die_" + die).removeClass("rolling");
+	}
+	
 	function roll_dice(){
+		clearTimeout(timeout);
+		
+		$("#game #die_add").remove();
+		
+		timeout = setTimeout(function(){
+			$("#game #die_" + dice).after("<div id='die_add' class='die add' onClick='add_die();'></span>");
+		}, 2500);
+		
 		for(var i = 1; i <= dice; i++){
-			
+			roll_die(i, 1 + Math.floor(Math.random() * 20));
 		}
 	}
