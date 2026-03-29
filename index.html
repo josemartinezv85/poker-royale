@@ -211,14 +211,19 @@
 			
 			<div id="played"></div>
 			
+			<div id="points_form" class="hidden">
+		
+				<span class="button" id="close" onClick="$('#points_form').addClass('hidden');">Cerrar</span>
+			</div>
+			
 			<form id="play">
 				<div id="play_hand" onClick="select_hand(1);"></div>
-				<div id="play_points" onClick="open_points_form(1);">0</div>
+				<div id="play_points" onClick="$('#points_form').removeClass('hidden');">0</div>
 				<div id="play_multi" onClick="open_multi_form(1);">0</div>
 				<div id="play_total">0</div>
-				<div id="play_reset" onClick="play_reset();">&#10226;</div>
-				<div id="play_discard" onClick="play_discard();">&#10008;</div>
-				<div id="play_confirm" onClick="play_confirm();">&#10004;</div>
+				<div id="play_reset" class="button" onClick="play_reset();">&#10226;</div>
+				<div id="play_discard" class="button" onClick="play_discard();">&#10008;</div>
+				<div id="play_confirm" class="button" onClick="play_confirm();">&#10004;</div>
 			</form>
 			
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
@@ -247,7 +252,7 @@
 				<div id="die_add" class="die add" onClick="add_die();"></div>
 			
 				<span class="button" id="roll" onClick="roll_dice();">Lanzar</span>
-				<span class="button" id="big_die_button" onClick=""></span>
+				<span class="button" id="dice_switch" onClick="change_dice();"></span>
 				<span class="button" id="close" onClick="$('#dice_form').addClass('hidden');">Cerrar</span>
 			</div>
 			
