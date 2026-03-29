@@ -146,7 +146,7 @@
 		margin-left: -38%;
 		font-size: 28px;
 		font-weight: bold;
-		opacity: 0.20;
+		opacity: 0.2;
 	}
 	div#levels .hand .sample span{ text-shadow: 0 0 3px #eeeeee; }
 	div#levels .hand .sample span.red{ color: #ff0000; }
@@ -313,33 +313,6 @@
 	}
 	div#game div#played div.discard::before{ content: "\2718  Descarte"; }
 	
-	div#game div#points_form{
-		position: absolute;
-		top: 0;
-		margin: 0 auto;
-		height: 100%;
-		width: 33.34%;
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 22% 22% 22% 18% 12%;
-		grid-gap: 1%;
-		align-items: center;
-		background-color: #eeeeee;
-		border: 4px solid #cccccc;
-		border-radius: 3px;
-		transition: all 0.3s ease-out;
-		opacity: 1;
-		transform: translateY(0);
-		visibility: visible;
-		z-index: 1;
-	}
-	div#game div#points_form.hidden{
-		opacity: 0;
-		scale: 25%;
-		transform: translateX(-50%) translateY(-150%);
-		visibility: hidden;
-	}
-	
 	div#game form{
 		position: relative;
 		display: grid;
@@ -493,6 +466,109 @@
 	}
 	div#game div#game_footer div.active span.counter{ display: none; }
 	div#game div#game_footer div.active span.button{ display: flex; }
+	
+	div#game div#hands_form{
+		position: absolute;
+		top: 0;
+		margin: 0 auto;
+		height: 100%;
+		width: 33.34%;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 24% 24% 24% 24%;
+		grid-gap: 1%;
+		align-items: center;
+		background-color: #eeeeee;
+		border: 4px solid #cccccc;
+		border-radius: 3px;
+		transition: all 0.3s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+		z-index: 1;
+	}
+	div#game div#hands_form.hidden{
+		opacity: 0;
+		scale: 25%;
+		transform: translateX(-150%) translateY(-175%);
+		visibility: hidden;
+	}
+	div#game div#hands_form div{
+		height: 100%;
+		border: 3px solid #44ff44;
+		border-radius: 6px;
+	}
+	div#game div#hands_form div.disabled{}
+	div#game div#hands_form div span{}
+	div#game div#hands_form div span.label{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 25%;
+		font-size: 14px;
+		font-weight: bold;
+		text-shadow: 0 0 3px #eeeeee;
+	}
+	div#game div#hands_form div span.sample{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 25%;
+		font-size: 24px;
+		text-shadow: 0 0 3px #eeeeee;
+		padding-bottom: 10px;
+	}
+	div#game div#hands_form div span.sample span.red{ color: #ff0000; }
+	div#game div#hands_form div span.sample span.black{ color: #000000; }
+/*	div#game div#hands_form div span.level{
+		display: grid;
+		align-items: center;
+		height: 30%;
+		grid-template-columns: 20% 40% 40%;
+		grid-template-rows: 75% 25%;
+	}
+	div#game div#hands_form div span.level span{ font-size: 8px; } */
+	div#game div#hands_form div span.points, div#game div#hands_form div span.multi{
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 25%;
+		width: 48%;
+		margin: 0 1%;
+		font-size: 18px;
+		font-weight: bold;
+		color: #eeeeee;
+		text-shadow: 1px 1px 3px #000000;
+		border-radius: 3px;
+	}
+	div#game div#hands_form div span.points{ background-color: #2222ff; }
+	div#game div#hands_form div span.multi{ background-color: #ff5500; }
+	
+	div#game div#points_form{
+		position: absolute;
+		top: 0;
+		margin: 0 auto;
+		height: 100%;
+		width: 33.34%;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 22% 22% 22% 18% 12%;
+		grid-gap: 1%;
+		align-items: center;
+		background-color: #eeeeee;
+		border: 4px solid #cccccc;
+		border-radius: 3px;
+		transition: all 0.3s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+	}
+	div#game div#points_form.hidden{
+		opacity: 0;
+		scale: 25%;
+		transform: translateX(-50%) translateY(-175%);
+		visibility: hidden;
+	}
 	
 	div#game div#dice_form{
 		position: absolute;

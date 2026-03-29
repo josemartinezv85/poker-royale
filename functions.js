@@ -38,9 +38,9 @@
 	points[2] = 10;		multi[2] = 2;	inc_points[2] = 15;		inc_multi[2] = 1;
 	points[3] = 20;		multi[3] = 2;	inc_points[3] = 20;		inc_multi[3] = 1;
 	points[4] = 30;		multi[4] = 3;	inc_points[4] = 20;		inc_multi[4] = 2;
-	points[5] = 30;		multi[5] = 4;	inc_points[5] = 30;		inc_multi[5] = 2;
-	points[6] = 35;		multi[6] = 4;	inc_points[6] = 15;		inc_multi[6] = 2;
-	points[7] = 40;		multi[7] = 4;	inc_points[7] = 15;		inc_multi[7] = 2;
+	points[5] = 30;		multi[5] = 4;	inc_points[5] = 25;		inc_multi[5] = 2;	// 30
+	points[6] = 35;		multi[6] = 4;	inc_points[6] = 25;		inc_multi[6] = 2;	// 15
+	points[7] = 40;		multi[7] = 4;	inc_points[7] = 30;		inc_multi[7] = 2;	// 15
 	points[8] = 60;		multi[8] = 7;	inc_points[8] = 30;		inc_multi[8] = 3;
 	points[9] = 100;	multi[9] = 8;	inc_points[9] = 40;		inc_multi[9] = 3;
 	points[10] = 120;	multi[10] = 12;	inc_points[10] = 35;	inc_multi[10] = 3;
@@ -100,7 +100,7 @@
 			dice = 1;				// BORRAR
 			tokens = 4;				// BORRAR
 			
-			$("#config #savegame").prop("checked", true);
+			$("#savegame").prop("checked", true);
 			
 			show_game();
 		}
@@ -135,9 +135,12 @@
 		for(var i = 12; i >= 1; i--){
 			$("#hand_" + i + " .plays").text(plays[i]);
 			$("#hand_" + i + " .level").text(level[i]);
-			if(level[i] == 1) $("#levels #hand_" + i + " .button.down").addClass("disabled");
-			$("#hand_" + i + " .points").text(points[i]);
-			$("#hand_" + i + " .multi").text(multi[i]);
+			if(level[i] == 1) $("#hand_" + i + " .button.down").addClass("disabled");
+			$("#hand_" + i + " .points").text(points[i] + inc_points[i] * (level[i] - 1));
+			$("#hand_" + i + " .multi").text(multi[i] + inc_multi[i] * (level[i] - 1));
+			
+			$("#hands_form #s_hand_" + i + " .points").text(points[i] + inc_points[i] * (level[i] - 1));
+			$("#hands_form #s_hand_" + i + " .multi").text(multi[i] + inc_multi[i] * (level[i] - 1));
 		}
 		
 		$("#levels #max_hands .counter").text(max_hands);
@@ -156,11 +159,6 @@
 		$("#game #game_header #round").html("Ronda " + round);
 		refresh_game_header();
 		$("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
-		
-		//$("#game #dice_form").hide();
-		//$("#game #hands_form").hide();
-		//$("#game #points_form").hide();
-		//$("#game #multi_form").hide();
 		
 		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
@@ -518,8 +516,10 @@
 		
 	}
 	
-	function select_hand(play){
+	function select_hand(hand){
 		
+		$("#hands_form").addClass("hidden");
+		save_game();
 	}
 	
 	function open_points_form(play){
