@@ -604,13 +604,15 @@
 	}
 	
 	function change_dice(){
-		if(!$("#game #dice_form #dice_switch").hasClass("regular")){
-			$("#game #dice_form #die_1").before("<div id='die_0' class='die'>&#63;</div>");
-			$("#game #dice_form #dice_switch").addClass("regular");
-		}
-		else{
-			$("#game #dice_form #die_0").remove();
-			$("#game #dice_form #dice_switch").removeClass("regular");
+		if(!$("#game #dice_switch").hasClass("disabled")){
+			if(!$("#game #dice_switch").hasClass("regular")){
+				$("#game #die_1").before("<div id='die_0' class='die'>&#63;</div>");
+				$("#game #dice_switch").addClass("regular");
+			}
+			else{
+				$("#game #die_0").remove();
+				$("#game #dice_switch").removeClass("regular");
+			}
 		}
 	}
 	
@@ -624,17 +626,15 @@
 	}
 	
 	function remove_die(){
-		if(!$("#game #die_" + dice).hasClass("rolling")){
-			clearTimeout(timeout);
+		if($("#game #die_" + dice).hasClass("button")){
 			if(!$("#game #die_" + dice).hasClass("active")){
+				clearTimeout(timeout);
 				refresh();
 				
-				$("#game #die_" + dice).removeClass("button");
 				$("#game #die_" + dice).addClass("active");
 				
 				timeout = setTimeout(function(){
 					$("#game #die_" + dice).removeClass("active");
-					$("#game #die_" + dice).addClass("button");
 				}, delay);
 			}
 			else{
@@ -652,10 +652,10 @@
 	
 	function roll_die(die, times){
 		if(times){
-			$("#game #die_" + die).addClass("rolling");
 			setTimeout(function(){
 				if(die) $("#game #die_" + die).attr("class", "die die_" + (1 + Math.floor(Math.random() * 12)));
 				else $("#game #die_0").text(Math.floor(Math.random() * 26));
+				$("#game #die_" + die).addClass("rolling");
 				roll_die(die, times - 1);
 			}, 5 * (30 - times));
 		}
@@ -666,12 +666,15 @@
 		if(!$("#game #roll").hasClass("disabled")){
 			clearTimeout(timeout);
 			$("#game #roll").addClass("disabled");
+			$("#game #die_" + dice).removeClass("button");
 			$("#game #die_add").remove();
+			$("#game #dice_switch").addClass("disabled");
 			
 			timeout = setTimeout(function(){
 				$("#game #roll").removeClass("disabled");
 				$("#game #die_" + dice).addClass("button");
 				$("#game #die_" + dice).after("<div id='die_add' class='die add' onClick='add_die();'></span>");
+				$("#game #dice_switch").removeClass("disabled");
 			}, 2500);
 			
 			if($("#game #die_0").length) roll_die(0, 10 + Math.floor(Math.random() * 20));
