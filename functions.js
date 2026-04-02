@@ -132,7 +132,12 @@
 		
 		$("#game #game_header #round").html("Ronda " + round);
 		refresh_game_header();
-		$("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
+		$("#game #game_header #goal").html(goal.toLocaleString());
+		
+		$("#game #play #play_hand #label").text("");
+		$("#play #play_hand #level").text("");
+		$("#play #play_hand #plays").text("");
+		$("#play #play_hand").addClass("empty");
 		
 		$("#game #play #play_points").text("0");
 		$("#game #play #play_multi").text("0");
@@ -141,6 +146,7 @@
 		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
 		$("#game #game_footer #hands_left .counter").text(hands_left);
+		$("#hands_form #s_hand").val(0);
 		
 		$("#config #suddeath").text(suddeath);
 		$("#config #nofigures").prop("checked", nofigures);
@@ -489,10 +495,10 @@
 		
 		refresh_game_header();
 		
-		if(suddeath >= round) $("#game #game_header #goal").text(goal.toLocaleString("es-ES"));
+		if(suddeath >= round) $("#game #game_header #goal").text(goal.toLocaleString());
 		else{
 			$("#game #game_header").addClass("suddeath");
-			$("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
+			$("#game #game_header #goal").html(goal.toLocaleString());
 			
 			$("#config #rounds_down").addClass("disabled");
 			$("#config #rounds_up").addClass("disabled");
@@ -504,46 +510,69 @@
 		save_game();
 	}
 	
-	function new_play(play){
-		
-	}
-	
-	function save_play(play){
-		
-	}
-	
 	function select_hand(hand){
-		$("#play #play_hand").removeClass("empty");
-		switch(hand){
-			case 1:	$("#play #play_hand #label").text("Carta más alta"); break;
-			case 2: $("#play #play_hand #label").text("Pareja"); break;
-			case 3: $("#play #play_hand #label").text("Doble pareja"); break;
-			case 4: $("#play #play_hand #label").text("Trío"); break;
-			case 5: $("#play #play_hand #label").text("Escalera"); break;
-			case 6: $("#play #play_hand #label").text("Color"); break;
-			case 7: $("#play #play_hand #label").text("Full"); break;
-			case 8: $("#play #play_hand #label").text("Póker"); break;
-			case 9: $("#play #play_hand #label").text("Esc. Color / Real"); break;
-			case 10: $("#play #play_hand #label").text("Repóker"); break;
-			case 11: $("#play #play_hand #label").text("Full de color"); break;
-			case 12: $("#play #play_hand #label").text("5 de color"); break;
-			default: break;
+		if(hand != $("#s_hand").val()){
+			$("#play #play_hand").removeClass("empty");
+			switch(hand){
+				case 1:	$("#play #play_hand #label").text("Carta más alta"); break;
+				case 2: $("#play #play_hand #label").text("Pareja"); break;
+				case 3: $("#play #play_hand #label").text("Doble pareja"); break;
+				case 4: $("#play #play_hand #label").text("Trío"); break;
+				case 5: $("#play #play_hand #label").text("Escalera"); break;
+				case 6: $("#play #play_hand #label").text("Color"); break;
+				case 7: $("#play #play_hand #label").text("Full"); break;
+				case 8: $("#play #play_hand #label").text("Póker"); break;
+				case 9: $("#play #play_hand #label").text("Esc. Color / Real"); break;
+				case 10: $("#play #play_hand #label").text("Repóker"); break;
+				case 11: $("#play #play_hand #label").text("Full de color"); break;
+				case 12: $("#play #play_hand #label").text("5 de color"); break;
+				default: break;
+			}
+			
+			$("#play #play_hand #level").text(level[hand]);
+			$("#play #play_hand #plays").text(plays[hand] + " + 1");
+			
+			$("#play #play_points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+			$("#play #play_multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
+			$("#play #play_confirm").text(((points[hand] + inc_points[hand] * (level[hand] - 1)) * (multi[hand] + inc_multi[hand] * (level[hand] - 1))).toLocaleString());
+			
+			$("#points_form #points_string").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+			$("#points_form #points_confirm").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+			
+			$("#hands_form #s_hand").val(hand);
+			save_game();
 		}
-		
-		$("#play #play_hand #level").text(level[hand]);
-		$("#play #play_hand #plays").text(plays[hand] + " + 1");
-		
-		$("#play #play_points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
-		$("#play #play_multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
-		$("#play #play_confirm").text(((points[hand] + inc_points[hand] * (level[hand] - 1)) * (multi[hand] + inc_multi[hand] * (level[hand] - 1))).toLocaleString("es-ES"));
-		
-		$("input[name='s_hand'][value=" + hand + "]").prop("checked", true);
 		$("#hands_form").addClass("hidden");
-		save_game();
 	}
 	
-	function open_points_form(play){
+	function points_add(inc){
+		$("#points_string").append(" +" + inc);
+		$("#points_confirm").text(eval($("#points_string").text()));
 		
+		$("#play_points").text(eval($("#points_string").text()));
+		$("#play_confirm").text(eval($("#points_string").text()) * $("#play_multi").text());
+	}
+	
+	function points_reset(){
+		clearTimeout(timeout);
+		if(!$("#points_reset").hasClass("active")){
+			refresh();
+			$("#points_reset").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#points_reset").removeClass("active");
+			}, delay);
+		}
+		else{
+			var p = points[parseInt($("#s_hand").val())] + inc_points[parseInt($("#s_hand").val())] * (level[parseInt($("#s_hand").val())] - 1);
+			
+			$("#points_string").text(p.toLocaleString());
+			$("#points_confirm").text(p.toLocaleString());
+			
+			$("#play_points").text(p.toLocaleString());
+			
+			$("#points_reset").removeClass("active");
+		}
 	}
 	
 	function open_multi_form(play){
@@ -561,7 +590,7 @@
 			}, delay);
 		}
 		else{
-			$("input[name='s_hand']").prop("checked", false);
+			$("#hands_form #s_hand").val(0);
 			
 			$("#play #play_hand #label").text("");
 			$("#play #play_hand #level").text("");
@@ -611,7 +640,7 @@
 	}
 	
 	function play_confirm(){
-		if($("input[name='s_hand']:checked").length){
+		if(parseInt($("#s_hand").val())){
 			clearTimeout(timeout);
 			if(!$("#play #play_confirm").hasClass("active")){
 				refresh();

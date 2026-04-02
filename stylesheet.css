@@ -351,7 +351,7 @@
 		grid-template-columns: 50% 50%;
 		grid-template-rows: 65% 35%;
 		background-image: linear-gradient(#aaffaa, #44ff44 50%); }
-	div#game form #play_hand.empty{ background: url("hand.png") center center / 75% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
+	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
 	div#game form #play_hand span{
 		display: flex;
 		width: 100%;
@@ -380,7 +380,7 @@
 	div#game form #play_points{ background-color: #2222ff; }
 	div#game form #play_multi{ background-color: #ff5500; }
 	div#game form #play_reset{
-		background: url("undo.png") center center / 40% no-repeat, linear-gradient(#ff0000, #990000 50%);
+		background: url("undo.png") center center / 20% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		border: 1px solid #990000;
 	}
 	div#game form #play_discard{
@@ -499,7 +499,7 @@
 		width: 100%;
 		height: 100%;
 		grid-template-columns: 49% 49%;
-		grid-template-rows: 24% 26% 24% 22%;
+		grid-template-rows: 24% 28% 24% 20%;
 		grid-gap: 1%;
 		align-items: center;
 		justify-content: center;
@@ -558,8 +558,8 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 22% 22% 22% 18% 12%;
+		grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
+		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
 		background-color: #eeeeee;
@@ -573,7 +573,70 @@
 	div#game div#points_form.hidden{
 		opacity: 0;
 		scale: 25%;
-		transform: translateX(-50%) translateY(-175%);
+		transform: translateX(-25%) translateY(-175%);
+		visibility: hidden;
+	}
+	div#game div#points_form div{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+	div#game div#points_form div#points_string{
+		grid-row: 1;
+		grid-column: 1 / 6;
+		border: 3px solid #2222ff;
+		border-radius: 3px;
+		font-size: 18px;
+		font-weight: bold;
+		color: #2222ff;
+	}
+	div#game div#points_form div.points_button{
+		font-size: 24px;
+		font-weight: bold;
+		color: #2222ff;
+		border: 3px solid #2222ff;
+		border-radius: 3px;
+		box-shadow: 2px 2px 3px #000000;		
+	}
+	div#game div#points_form div#points_reset.button{
+		grid-row: 5;
+		grid-column: 1 / 3;
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #dddddd 50%);
+	}
+	div#game div#points_form div#points_reset.button.active{
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+	}
+	div#game div#points_form div#points_confirm.button{
+		grid-row: 5;
+		grid-column: 3 / 6;
+		background-image: linear-gradient(#6666ff, #2222ff 50%);
+	}
+	
+	div#game div#multi_form{
+		position: absolute;
+		top: 0;
+		margin: 0 auto;
+		height: 100%;
+		width: 33.34%;
+		display: grid;
+		grid-template-columns: auto auto auto auto auto;
+		grid-template-rows: 20% 20% 20% 20% 16%;
+		grid-gap: 1%;
+		align-items: center;
+		background-color: #eeeeee;
+		border: 4px solid #cccccc;
+		border-radius: 3px;
+		transition: all 0.25s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+	}
+	div#game div#multi_form.hidden{
+		opacity: 0;
+		scale: 25%;
+		transform: translateX(75%) translateY(-175%);
 		visibility: hidden;
 	}
 	

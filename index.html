@@ -217,8 +217,8 @@
 					<span id="level"></span>
 					<span id="plays"></span>
 				</div>
-				<div id="play_points" onClick="$('#points_form').removeClass('hidden');"></div>
-				<div id="play_multi" onClick="open_multi_form(1);">0</div>
+				<div id="play_points" onClick="if(parseInt($('#s_hand').val())) $('#points_form').removeClass('hidden');"></div>
+				<div id="play_multi" onClick="if(parseInt($('#s_hand').val())) $('#multi_form').removeClass('hidden');">0</div>
 				<div id="play_reset" class="button" onClick="play_reset();"></div>
 				<div id="play_discard" class="button" onClick="play_discard();"></div>
 				<div id="play_confirm" class="button" onClick="play_confirm();"></div>
@@ -246,85 +246,74 @@
 			</div>
 			
 			<div id="hands_form" class="hidden">
+				<input type="hidden" name="s_hand" id="s_hand" />
 				<div id="s_hand_12" onClick="select_hand(12);">
-					<input type="radio" name="s_hand" value="12" />
 					<span class="label">5 de color</span>
 					<span class="sample"><span class="black">&#127137;&#127137;&#127137;&#127137;&#127137;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_11" onClick="select_hand(11);">
-					<input type="radio" name="s_hand" value="11" />
 					<span class="label">Full de color</span>
 					<span class="sample"><span class="red">&#127162;&#127162;&#127162;&#127156;&#127156;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_10" onClick="select_hand(10);">
-					<input type="radio" name="s_hand" value="10" />
 					<span class="label">Repóker</span>
 					<span class="sample"><span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span><span class="black">&#127137;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_9" onClick="select_hand(9);">
-					<input type="radio" name="s_hand" value="9" />
 					<span class="label">Esc. Color / Real</span>
 					<span class="sample"><span class="red">&#127153;&#127166;&#127165;&#127163;&#127162;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_8" onClick="select_hand(8);">
-					<input type="radio" name="s_hand" value="8" />
 					<span class="label">Póker</span>
 					<span class="sample"><span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_7" onClick="select_hand(7);">
-					<input type="radio" name="s_hand" value="7" />
 					<span class="label">Full</span>
 					<span class="sample"><span class="red">&#127175;</span><span class="black">&#127191;</span><span class="red">&#127159;</span><span class="black">&#127140;</span><span class="red">&#127156;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_6" onClick="select_hand(6);">
-					<input type="radio" name="s_hand" value="6" />
 					<span class="label">Color</span>
 					<span class="sample"><span class="red">&#127178;&#127175;&#127173;&#127171;&#127170;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_5" onClick="select_hand(5);">
-					<input type="radio" name="s_hand" value="5" />
 					<span class="label">Escalera</span>
 					<span class="sample"><span class="black">&#127190;</span><span class="red">&#127173;</span><span class="black">&#127140;</span><span class="red">&#127155;</span><span class="black">&#127186;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_4" onClick="select_hand(4);">
-					<input type="radio" name="s_hand" value="4" />
 					<span class="label">Trío</span>
 					<span class="sample"><span class="red">&#127171;</span><span class="black">&#127139;</span><span class="red">&#127155;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_3" onClick="select_hand(3);">
-					<input type="radio" name="s_hand" value="3" />
 					<span class="label">Doble pareja</span>
 					<span class="sample"><span class="black">&#127145;</span><span class="red">&#127161;</span><span class="black">&#127188;</span><span class="red">&#127172;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_2" onClick="select_hand(2);">
-					<input type="radio" name="s_hand" value="2" />
 					<span class="label">Pareja</span>
 					<span class="sample"><span class="red">&#127173;</span><span class="black">&#127189;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_1" onClick="select_hand(1);">
-					<input type="radio" name="s_hand" value="1" />
 					<span class="label">Carta más alta</span>
 					<span class="sample"><span class="black">&#127146;</span></span>
 					<span class="points"></span><span class="multi"></span>
@@ -333,8 +322,45 @@
 			</div>
 			
 			<div id="points_form" class="hidden">
-		
-				<span class="button" id="close" onClick="$('#points_form').addClass('hidden');">Cerrar</span>
+				<div id="points_string"></div>
+				<div class="points_button" onClick="points_add(100);">+100</div>
+				<div class="points_button" onClick="points_add(80);">+80</div>
+				<div class="points_button" onClick="points_add(50);">+50</div>
+				<div class="points_button" onClick="points_add(20);">+20</div>
+				<div class="points_button" onClick="points_add(11);">+11</div>
+				<div class="points_button" onClick="points_add(10);">+10</div>
+				<div class="points_button" onClick="points_add(9);">+9</div>
+				<div class="points_button" onClick="points_add(8);">+8</div>
+				<div class="points_button" onClick="points_add(7);">+7</div>
+				<div class="points_button" onClick="points_add(6);">+6</div>
+				<div class="points_button" onClick="points_add(5);">+5</div>
+				<div class="points_button" onClick="points_add(4);">+4</div>
+				<div class="points_button" onClick="points_add(3);">+3</div>
+				<div class="points_button" onClick="points_add(2);">+2</div>
+				<div class="points_button" onClick="points_add(1);">+1</div>
+				<div class="button" id="points_reset" onClick="points_reset();"></div>
+				<div class="button" id="points_confirm" onClick="$('#points_form').addClass('hidden');"></div>
+			</div>
+			
+			<div id="multi_form" class="hidden">
+				<div id="multi_string"></div>
+				<div class="multi_plus_button" onClick="multi_plus(5);">x5</div>
+				<div class="multi_plus_button" onClick="multi_plus(4);">x4</div>
+				<div class="multi_plus_button" onClick="multi_plus(3);">x3</div>
+				<div class="multi_plus_button" onClick="multi_plus(2);">x2</div>
+				<div class="multi_plus_button" onClick="multi_plus(1.5);">x1.5</div>
+				<div class="multi_button" onClick="multi_add(10);">+10</div>
+				<div class="multi_button" onClick="multi_add(9);">+9</div>
+				<div class="multi_button" onClick="multi_add(8);">+8</div>
+				<div class="multi_button" onClick="multi_add(7);">+7</div>
+				<div class="multi_button" onClick="multi_add(6);">+6</div>
+				<div class="multi_button" onClick="multi_add(5);">+5</div>
+				<div class="multi_button" onClick="multi_add(4);">+4</div>
+				<div class="multi_button" onClick="multi_add(3);">+3</div>
+				<div class="multi_button" onClick="multi_add(2);">+2</div>
+				<div class="multi_button" onClick="multi_add(1);">+1</div>
+				<div class="button" id="multi_reset" onClick="multi_reset();"></div>
+				<div class="button" id="multi_confirm" onClick="$('#multi_form').addClass('hidden');"></div>
 			</div>
 			
 			<div id="dice_form" class="hidden">
