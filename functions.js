@@ -158,7 +158,11 @@
 		
 		$("#game #game_header #round").html("Ronda " + round);
 		refresh_game_header();
-		$("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
+		$("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
+		
+		$("#game #play #play_points").text("0");
+		$("#game #play #play_multi").text("0");
+		$("#game #play #play_confirm").text("0");
 		
 		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
@@ -362,9 +366,18 @@
 	
 	function refresh_game_header(){
 		switch(blind - (3 * (round - 1))){
-			case 1:	$("#game #game_header #blind").html("&#9734; Ciega PEQUEÑA"); break;
-			case 2: $("#game #game_header #blind").html("&#9733; Ciega GRANDE"); break;
-			case 3:	$("#game #game_header #blind").html("&#10029; Ciega <b>JEFE</b>"); break;
+			case 1:
+				$("#game #game_header").attr("class", "small_blind");
+				$("#game #game_header #blind").html("Ciega PEQUEÑA");
+				break;
+			case 2:
+				$("#game #game_header").attr("class", "big_blind");
+				$("#game #game_header #blind").html("Ciega GRANDE");
+				break;
+			case 3:
+				$("#game #game_header").attr("class", "boss_blind");
+				$("#game #game_header #blind").html("Ciega JEFE");
+				break;
 			default: break;
 		}
 	}
@@ -491,17 +504,17 @@
 	function next_blind(){
 		blind++;
 		round = Math.trunc((blind + 2) / 3);
-		$("#game #game_header #round").html("Ronda <b>" + round + "</b>");
+		$("#game #game_header #round").html("Ronda " + round);
 		
 		var base_points = (suddeath >= round) ? 300 * (2 ** (round - 1)) : 300 * (2 ** (round - 1)) + 100 * (2 ** (round - 1) * round - 1) - 100 * (round - 1);
 		goal = base_points * (0.5 * (blind - (3 * (round - 1)) + 1));
 		
 		refresh_game_header();
 		
-		if(suddeath >= round) $("#game #game_header #goal").html("&#9672; " + goal + " &#9672;");
+		if(suddeath >= round) $("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
 		else{
 			$("#game #game_header").addClass("suddeath");
-			$("#game #game_header #goal").html("&#9760; <b>" + goal + "</b> &#9760;");
+			$("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
 			
 			$("#config #rounds_down").addClass("disabled");
 			$("#config #rounds_up").addClass("disabled");

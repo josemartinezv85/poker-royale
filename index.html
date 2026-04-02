@@ -213,12 +213,11 @@
 			
 			<form id="play">
 				<div id="play_hand" onClick="$('#hands_form').removeClass('hidden');"></div>
-				<div id="play_points" onClick="$('#points_form').removeClass('hidden');">0</div>
+				<div id="play_points" onClick="$('#points_form').removeClass('hidden');"></div>
 				<div id="play_multi" onClick="open_multi_form(1);">0</div>
-				<div id="play_total">0</div>
-				<div id="play_reset" class="button" onClick="play_reset();">&#10226;</div>
-				<div id="play_discard" class="button" onClick="play_discard();">&#10008;</div>
-				<div id="play_confirm" class="button" onClick="play_confirm();">&#10004;</div>
+				<div id="play_reset" class="button" onClick="play_reset();"></div>
+				<div id="play_discard" class="button" onClick="play_discard();"></div>
+				<div id="play_confirm" class="button" onClick="play_confirm();"></div>
 			</form>
 			
 			<div id="next_round" onClick="next_blind()";>Siguiente</div>
