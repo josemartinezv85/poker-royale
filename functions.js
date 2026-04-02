@@ -1,57 +1,26 @@
-	// &hearts;
-	// &diams; 
-	// &clubs;
-	// &spades;
-	// &#8634; // REESTABLECER
-	// &#9635; // CUADRO CON PUNTICO DENTRO
-	// &#9634; // CUADRO BLANCO CON ESQUINAS REDONDEADAS
-	// &#9671; // DIAMANTE BLANCO
-	// &#9672; // DIAMANTE BLANCO CON DIAMANTE NEGRO EN EL INTERIOR
-	// &#9744; // CUADRO BLANCO
-	// &#9745; // CUADRO BLANCO CON CHECK
-	// &#9746; // CUADRO BLANCO CON X
-	// &#9760; // CALAVERA CON HUESOS
-	// &#128401; &#x1f591; MANO ABIERTA75269804G
-	// &#10003;// CHECK FINO
-	// &#10004;// CHECK GRUESO
-	// &#10008;// DISCARD GRUESO
-	// &#10025;// ESTRELLA CON BORDE REDONDEADO
-	// &#10031;// ESTRELLA CHULA
-	// &#9885; // ESTRELLA BLANCA CRUZADA
-	// &#9856; &#x2680; // DADO 1
-	// &#9857; &#x2681; // DADO 2
-	// &#9858; &#x2682; // DADO 3
-	// &#9859; &#x2683; // DADO 4
-	// &#9860; &#x2684; // DADO 5
-	// &#9861; &#x2685; // DADO 6
-	// &#10227; // flecha relanzar
-	// &#128472; reroll
-	// &plusmn; SÍMBOLO MÁS/MENOS
-	// &#128369; &#x1f571; CALAVERA CON HUESOS
-	
 	const points = new Array();
 	const multi = new Array();
 	const inc_points = new Array();
 	const inc_multi = new Array();
 	
-	points[1] = 5;		multi[1] = 1;	inc_points[1] = 10;		inc_multi[1] = 1;
-	points[2] = 10;		multi[2] = 2;	inc_points[2] = 15;		inc_multi[2] = 1;
-	points[3] = 20;		multi[3] = 2;	inc_points[3] = 20;		inc_multi[3] = 1;
-	points[4] = 30;		multi[4] = 3;	inc_points[4] = 20;		inc_multi[4] = 2;
-	points[5] = 30;		multi[5] = 4;	inc_points[5] = 25;		inc_multi[5] = 2;	// 30
-	points[6] = 35;		multi[6] = 4;	inc_points[6] = 25;		inc_multi[6] = 2;	// 15
-	points[7] = 40;		multi[7] = 4;	inc_points[7] = 30;		inc_multi[7] = 2;	// 15
-	points[8] = 60;		multi[8] = 7;	inc_points[8] = 30;		inc_multi[8] = 3;
-	points[9] = 100;	multi[9] = 8;	inc_points[9] = 40;		inc_multi[9] = 3;
-	points[10] = 120;	multi[10] = 12;	inc_points[10] = 35;	inc_multi[10] = 3;
-	points[11] = 140;	multi[11] = 14;	inc_points[11] = 40;	inc_multi[11] = 3;
-	points[12] = 160;	multi[12] = 16;	inc_points[12] = 40;	inc_multi[12] = 3;
+	points[1] = 5;		multi[1] = 1;		inc_points[1] = 10;		inc_multi[1] = 1;
+	points[2] = 10;		multi[2] = 2;		inc_points[2] = 15;		inc_multi[2] = 1;
+	points[3] = 20;		multi[3] = 2;		inc_points[3] = 20;		inc_multi[3] = 1;
+	points[4] = 30;		multi[4] = 3;		inc_points[4] = 20;		inc_multi[4] = 2;
+	points[5] = 30;		multi[5] = 4;		inc_points[5] = 25;		inc_multi[5] = 2;	// 30
+	points[6] = 35;		multi[6] = 4;		inc_points[6] = 25;		inc_multi[6] = 2;	// 15
+	points[7] = 40;		multi[7] = 4;		inc_points[7] = 30;		inc_multi[7] = 2;	// 15
+	points[8] = 60;		multi[8] = 7;		inc_points[8] = 30;		inc_multi[8] = 3;
+	points[9] = 100;	multi[9] = 8;		inc_points[9] = 40;		inc_multi[9] = 3;
+	points[10] = 120;	multi[10] = 12;		inc_points[10] = 35;	inc_multi[10] = 3;
+	points[11] = 140;	multi[11] = 14;		inc_points[11] = 40;	inc_multi[11] = 3;
+	points[12] = 160;	multi[12] = 16;		inc_points[12] = 40;	inc_multi[12] = 3;
 	
 	var level = new Array();
 	var plays = new Array();
 	var max_hands, max_discards;
 	var hands_left, discards_left;
-	var round, blind, goal, score;
+	var round, blind, goal;
 	var played_hands, not_played_hands;
 	var played_discards, not_played_discards;
 	var defeated_blinds, not_defeated_blinds;
@@ -59,6 +28,7 @@
 	var cards;
 	var dice;
 	var tokens;
+	var score;
 	var suddeath;
 	var nofigures, balanced;
 	var timeout = 0;
@@ -93,12 +63,13 @@
 			defeated_blinds = 0;	// BORRAR
 			not_defeated_blinds = 0;// BORRAR
 			increased_levels = 0;	// BORRAR
-			suddeath = 6;			// BORRAR
-			nofigures = false;		// BORRAR
-			balanced = false;		// BORRAR
 			cards = 0				// BORRAR
 			dice = 1;				// BORRAR
 			tokens = 4;				// BORRAR
+			score = 0;				// BORRAR
+			suddeath = 6;			// BORRAR
+			nofigures = false;		// BORRAR
+			balanced = false;		// BORRAR
 			
 			$("#savegame").prop("checked", true);
 			
@@ -119,12 +90,13 @@
 			defeated_blinds = 0;
 			not_defeated_blinds = 0;
 			increased_levels = 0;
-			suddeath = 6;
-			nofigures = $("#nofigures").is(":checked");
-			balanced = $("#balanced").is(":checked");
 			cards = 0;
 			dice = 1;
 			tokens = 4;
+			score = 0;
+			suddeath = 6;
+			nofigures = $("#nofigures").is(":checked");
+			balanced = $("#balanced").is(":checked");
 			
 			for(var i = 12; i >= 1; i--){
 				level[i] = 1;
@@ -517,7 +489,7 @@
 		
 		refresh_game_header();
 		
-		if(suddeath >= round) $("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
+		if(suddeath >= round) $("#game #game_header #goal").text(goal.toLocaleString("es-ES"));
 		else{
 			$("#game #game_header").addClass("suddeath");
 			$("#game #game_header #goal").html(goal.toLocaleString("es-ES"));
@@ -541,7 +513,31 @@
 	}
 	
 	function select_hand(hand){
+		$("#play #play_hand").removeClass("empty");
+		switch(hand){
+			case 1:	$("#play #play_hand #label").text("Carta más alta"); break;
+			case 2: $("#play #play_hand #label").text("Pareja"); break;
+			case 3: $("#play #play_hand #label").text("Doble pareja"); break;
+			case 4: $("#play #play_hand #label").text("Trío"); break;
+			case 5: $("#play #play_hand #label").text("Escalera"); break;
+			case 6: $("#play #play_hand #label").text("Color"); break;
+			case 7: $("#play #play_hand #label").text("Full"); break;
+			case 8: $("#play #play_hand #label").text("Póker"); break;
+			case 9: $("#play #play_hand #label").text("Esc. Color / Real"); break;
+			case 10: $("#play #play_hand #label").text("Repóker"); break;
+			case 11: $("#play #play_hand #label").text("Full de color"); break;
+			case 12: $("#play #play_hand #label").text("5 de color"); break;
+			default: break;
+		}
 		
+		$("#play #play_hand #level").text(level[hand]);
+		$("#play #play_hand #plays").text(plays[hand] + " + 1");
+		
+		$("#play #play_points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+		$("#play #play_multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
+		$("#play #play_confirm").text(((points[hand] + inc_points[hand] * (level[hand] - 1)) * (multi[hand] + inc_multi[hand] * (level[hand] - 1))).toLocaleString("es-ES"));
+		
+		$("input[name='s_hand'][value=" + hand + "]").prop("checked", true);
 		$("#hands_form").addClass("hidden");
 		save_game();
 	}
@@ -565,9 +561,16 @@
 			}, delay);
 		}
 		else{
+			$("input[name='s_hand']").prop("checked", false);
 			
-			
-			
+			$("#play #play_hand #label").text("");
+			$("#play #play_hand #level").text("");
+			$("#play #play_hand #plays").text("");
+			$("#play #play_hand").addClass("empty");
+		
+			$("#play #play_points").text(0);
+			$("#play #play_multi").text(0);
+			$("#play #play_confirm").text(0);
 			
 			$("#play #play_reset").removeClass("active");
 		}
@@ -588,7 +591,7 @@
 				played_discards++;
 				discards_left--;
 				
-				$("#game #played").append("<div class='discard'></div>");
+				$("#game #played").append("<div class='discard'><img src='reject.png' />Descarte</div>");
 				$("#game #played .discard").animate({ height: "18px" }, 250);
 				
 				$("#play #play_discard").removeClass("active");
@@ -608,23 +611,25 @@
 	}
 	
 	function play_confirm(){
-		clearTimeout(timeout);
-		if(!$("#play #play_confirm").hasClass("active")){
-			refresh();
-			$("#play #play_confirm").addClass("active");
+		if($("input[name='s_hand']:checked").length){
+			clearTimeout(timeout);
+			if(!$("#play #play_confirm").hasClass("active")){
+				refresh();
+				$("#play #play_confirm").addClass("active");
+				
+				timeout = setTimeout(function(){
+					$("#play #play_confirm").removeClass("active");
+				}, delay);
+			}
+			else{
 			
-			timeout = setTimeout(function(){
+			
+			
+			
 				$("#play #play_confirm").removeClass("active");
-			}, delay);
+				save_game();
+			}
 		}
-		else{
-			
-			
-			
-			
-			$("#play #play_confirm").removeClass("active");
-		}
-	
 	}
 	
 	function change_dice(){

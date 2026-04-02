@@ -19,6 +19,7 @@
 		font-family: Bahnschrift, Tahoma, Verdana, sans-serif; /*Din, Tahoma, sans-serif; */
 		font-size: 10px;
 		text-align: center;
+		user-select: none;
 	}
 	div, span{ box-sizing: border-box; }
 
@@ -274,24 +275,25 @@
 		background-color: #000099;
 		color: white;
 	}
-	div#game div#game_header.small_blind{}
-	div#game div#game_header.big_blind{}
-	div#game div#game_header.boss_blind{ background-image: linear-gradient(#0000ff, #000099 50%); }
-	div#game div#game_header.suddeath{ filter: drop-shadow(0 0 5px #ff0000); }
+	div#game div#game_header.small_blind{ background-color: #004400; }
+	div#game div#game_header.big_blind{ background-color: #666600; }
+	div#game div#game_header.boss_blind{ background-image: linear-gradient(#ff0000, #660000 50%); }
+	div#game div#game_header.suddeath{ box-shadow: 0 0 5px #ff0000; }
 	
 	div#game div#game_header span{
 		display: flex;
 		height: 100%;
-		width: 38%;
+		width: 35%;
 		align-items: center;
 		justify-content: center;
+		filter: drop-shadow(0 0 1px #000000);
 	}
-	div#game div#game_header #round{ width: 22%; }
+	div#game div#game_header #round{ width: 28%; }
 	div#game div#game_header #blind{}
-	div#game div#game_header.small_blind #blind{ background: url("blind_small.png") left center / 12% no-repeat, url("blind_small.png") right center / 12% no-repeat; }
-	div#game div#game_header.big_blind #blind{ background: url("blind_big.png") left center / 12% no-repeat, url("blind_big.png") right center / 12% no-repeat; }
-	div#game div#game_header.boss_blind #blind{ background: url("blind_boss.png") left center / 12% no-repeat, url("blind_boss.png") right center / 12% no-repeat; }
-	div#game div#game_header #goal{ background: url("token.png") 5% center / 10% no-repeat, url("token.png") 95% center / 10% no-repeat; }
+	div#game div#game_header.small_blind #blind{ background: url("blind_small.png") left center / 10% no-repeat, url("blind_small.png") right center / 10% no-repeat; }
+	div#game div#game_header.big_blind #blind{ background: url("blind_big.png") left center / 10% no-repeat, url("blind_big.png") right center / 10% no-repeat; }
+	div#game div#game_header.boss_blind #blind{ background: url("blind_boss.png") left center / 10% no-repeat, url("blind_boss.png") right center / 10% no-repeat; }
+	div#game div#game_header #goal{ background: url("token.png") 5% center / 8% no-repeat, url("token.png") 95% center / 8% no-repeat; }
 	
 	div#game div#played{}
 	
@@ -305,17 +307,22 @@
 		height: 0;
 		border: 1px solid #666600;
 		background-color: #999900;
-		font-size: 10px;
+		font-size: 12px;
 		font-weight: bold;
 		color: #eeeeee;
+		text-shadow: 0 0 1px #000000;
 		border-radius: 3px;
+		box-shadow: 2px 2px 3px #000000;
 	}
-	div#game div#played div.discard::before{ content: "\2718  Descarte"; }
+	div#game div#played div.discard img{
+		max-height: 90%;
+		margin-right: 1%;
+	}
 	
 	div#game form{
 		position: relative;
 		display: grid;
-		grid-template-columns: 22% 38% 38%;
+		grid-template-columns: 28% 35% 35%;
 		grid-template-rows: 48% 48%;
 		grid-gap: 4% 1%;
 		width: 98%;
@@ -339,9 +346,36 @@
 		color: #eeeeee;
 	}
 	
-	div#game form #play_hand{}
+	div#game form #play_hand{
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: 65% 35%;
+		background-image: linear-gradient(#aaffaa, #44ff44 50%); }
 	div#game form #play_hand.empty{ background: url("hand.png") center center / 75% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
-	
+	div#game form #play_hand span{
+		display: flex;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+		color: #000000;
+	}
+	div#game form #play_hand #label{
+		grid-row: 1;
+		grid-column: 1 / 3;
+		font-size: 14px;
+		font-weight: bold;
+		text-shadow: -1px 0 1px #eeeeee,
+					-1px 1px 1px #eeeeee,
+					0 1px 1px #eeeeee,
+					1px 1px 1px #eeeeee,
+					1px 0 1px #eeeeee,
+					1px -1px 1px #eeeeee,
+					0 -1px 1px #eeeeee,
+					-1px -1px 1px #eeeeee;
+	}
+	div#game form #play_hand #level{ font-size: 14px; font-weight: bold; }
+	div#game form #play_hand #plays{ font-size: 12px; font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ text-shadow: 1px 1px 2px #000000; }
 	div#game form #play_points{ background-color: #2222ff; }
 	div#game form #play_multi{ background-color: #ff5500; }
@@ -356,8 +390,6 @@
 	div#game form #play_confirm{
 		background: url("confirm.png") 90% center / 20% no-repeat, linear-gradient(#009999, #006666 50%);
 		border: 1px solid #006666;
-		justify-content: left;
-		padding-left: 10%;
 		text-shadow: 1px 1px 2px #000000;
 	}
 	div#game form #play_reset, div#game form #play_discard, div#game form #play_confirm{ opacity: 0.5; }
