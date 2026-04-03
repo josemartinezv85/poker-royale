@@ -120,13 +120,13 @@
 	div#levels .hand.odd{}
 	div#levels .hand.active{
 		background-image: linear-gradient(#aaffaa, #44ff44 50%);
-		z-index: 2;
+		z-index: 1;
 		box-shadow: 2px 2px 3px #666666;
 		transition: box-shadow 0.2s 0.2s;
 	}
 	div#levels .hand span{
 		display: flex;
-		place-items: center;
+		align-items: center;
 		justify-content: center;
 		height: 100%;
 	}
@@ -142,14 +142,13 @@
 					1px -1px 1px #eeeeee,
 					0 -1px 1px #eeeeee,
 					-1px -1px 1px #eeeeee;
-		z-index: 1;
 	}
 	div#levels .hand .sample{
 		width: 38%;
 		margin-left: -38%;
 		font-size: 28px;
 		font-weight: bold;
-		opacity: 0.2;
+		opacity: 0.3;
 	}
 	div#levels .hand .sample span{}
 	div#levels .hand .sample span.red{ color: #ff0000; }
@@ -211,7 +210,7 @@
 	div#levels .levels_footer{
 		position: absolute;
 		display: flex;
-		place-items: center;
+		align-items: center;
 		justify-content: center;
 		padding: 0.2% 0;
 		width: 32.66%;
@@ -230,7 +229,7 @@
 	
 	div#levels .levels_footer span{
 		display: flex;
-		place-items: center;
+		align-items: center;
 		justify-content: center;
 		height: 100%;
 		font-size: 18px;
@@ -265,7 +264,7 @@
 		color: #eeeeee;
 	}
 	div#levels #tokens.active{
-		background-image: linear-gradient(#666666, #666666 50%);
+		background-image: linear-gradient(#666666, #222222 50%);
 		color: #eeeeee;
 	}
 	div#levels .levels_footer.active .button{ opacity: 1; }
@@ -398,6 +397,16 @@
 					0 -1px 1px #eeeeee,
 					-1px -1px 1px #eeeeee;
 	}
+	div#game form #play_hand #sample{
+		grid-area: 1 / 1 / 1 / 3;
+		height: 100%;
+		justify-content: center;
+		font-size: 32px;
+		opacity: 0.3;
+	}
+	div#game form #play_hand #sample span{ width: auto; text-shadow: 0 0 2px #eeeeee; }
+	div#game form #play_hand #sample span.black{ color: #000000; }
+	div#game form #play_hand #sample span.red{ color: #ff0000; }
 	div#game form #play_hand #level{ font-size: 14px; font-weight: bold; }
 	div#game form #play_hand #plays{ font-size: 12px; font-weight: normal; }
 	div#game form #play_points, div#game form #play_multi{ text-shadow: 1px 1px 2px #000000; }
@@ -522,7 +531,6 @@
 		opacity: 1;
 		transform: translateY(0);
 		visibility: visible;
-		z-index: 1;
 	}
 	div#game div#hands_form.hidden{
 		opacity: 0;
@@ -636,7 +644,7 @@
 		color: #2222ff;
 		border: 3px solid #2222ff;
 		border-radius: 3px;
-		box-shadow: 2px 2px 3px #000000;
+		box-shadow: 2px 2px 3px #666666;
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
 	}
 	div#game div#points_form span#points_reset.button{
@@ -644,13 +652,13 @@
 		grid-column: 1 / 3;
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
 		border: 1px solid #cccccc;
-		box-shadow: 0 0 0 #000000;
+		box-shadow: 0 0 0 transparent;
 		transition: box-shadow 0.2s;
 	}
 	div#game div#points_form span#points_reset.button.active{
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
 		border: 1px solid #660000;
-		box-shadow: 2px 2px 3px #000000;
+		box-shadow: 2px 2px 3px #666666;
 		transition: box-shadow 0.2s 0.2s;
 	}
 	div#game div#points_form span#points_confirm.button{
@@ -668,7 +676,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: auto auto auto auto auto;
+		grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
 		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
@@ -698,21 +706,22 @@
 		grid-column: 1 / 6;
 		border: 3px solid #eeeeee;
 		border-radius: 10px;
-		font-size: 20px;
+		font-size: 28px;
 		font-weight: bold;
 		color: #eeeeee;
 		background-color: #ff5500;
 		overflow: hidden;
 	}
-	div#game div#points_form div.button{
+	div#game div#multi_form div.button{
 		font-size: 24px;
 		font-weight: bold;
 		border: 3px solid #ff5500;
 		border-radius: 3px;
-		box-shadow: 2px 2px 3px #000000;
+		box-shadow: 2px 2px 3px #666666;
 	}
 	div#game div#multi_form div.button.add{
 		background-image: linear-gradient(#eeeeee, #cccccc 50%);
+		color: #ff5500;
 	}
 	div#game div#multi_form div.button.plus{
 		background-image: linear-gradient(#ffaa00, #ff5500 50%);
@@ -721,14 +730,20 @@
 		grid-row: 5;
 		grid-column: 1 / 3;
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%);
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.2s;
 	}
 	div#game div#multi_form span#multi_reset.button.active{
 		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		box-shadow: 2px 2px 3px #666666;
+		transition: box-shadow 0.2s 0.2s;
 	}
 	div#game div#multi_form span#multi_confirm.button{
 		grid-row: 5;
 		grid-column: 3 / 6;
 		background-image: linear-gradient(#ff8800, #ff5500 50%);
+		border: 1px solid #ff5500;
+		font-size: 28px;
 	}
 	
 	div#game div#dice_form{

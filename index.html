@@ -213,6 +213,7 @@
 			
 			<form id="play">
 				<div id="play_hand" class="empty enabled" onClick="$('#hands_form').removeClass('hidden');">
+					<span id="sample"></span>
 					<span id="label"></span>
 					<span id="level"></span>
 					<span id="plays"></span>
@@ -323,9 +324,9 @@
 			
 			<div id="points_form" class="hidden">
 				<div id="points_string"></div>
-				<div class="button add" onClick="points_add(100);">+100</div>
 				<div class="button add" onClick="points_add(80);">+80</div>
 				<div class="button add" onClick="points_add(50);">+50</div>
+				<div class="button add" onClick="points_add(30);">+30</div>
 				<div class="button add" onClick="points_add(20);">+20</div>
 				<div class="button add" onClick="points_add(11);">+11</div>
 				<div class="button add" onClick="points_add(10);">+10</div>
@@ -344,21 +345,21 @@
 			
 			<div id="multi_form" class="hidden">
 				<div id="multi_string"></div>
-				<div class="multi_plus_button" onClick="multi_plus(5);">x5</div>
-				<div class="multi_plus_button" onClick="multi_plus(4);">x4</div>
-				<div class="multi_plus_button" onClick="multi_plus(3);">x3</div>
-				<div class="multi_plus_button" onClick="multi_plus(2);">x2</div>
-				<div class="multi_plus_button" onClick="multi_plus(1.5);">x1.5</div>
-				<div class="multi_button" onClick="multi_add(10);">+10</div>
-				<div class="multi_button" onClick="multi_add(9);">+9</div>
-				<div class="multi_button" onClick="multi_add(8);">+8</div>
-				<div class="multi_button" onClick="multi_add(7);">+7</div>
-				<div class="multi_button" onClick="multi_add(6);">+6</div>
-				<div class="multi_button" onClick="multi_add(5);">+5</div>
-				<div class="multi_button" onClick="multi_add(4);">+4</div>
-				<div class="multi_button" onClick="multi_add(3);">+3</div>
-				<div class="multi_button" onClick="multi_add(2);">+2</div>
-				<div class="multi_button" onClick="multi_add(1);">+1</div>
+				<div class="button plus" onClick="multi_plus(5);">x5</div>
+				<div class="button plus" onClick="multi_plus(4);">x4</div>
+				<div class="button plus" onClick="multi_plus(3);">x3</div>
+				<div class="button plus" onClick="multi_plus(2);">x2</div>
+				<div class="button plus" onClick="multi_plus(1.5);">x1.5</div>
+				<div class="button add" onClick="multi_add(10);">+10</div>
+				<div class="button add" onClick="multi_add(9);">+9</div>
+				<div class="button add" onClick="multi_add(8);">+8</div>
+				<div class="button add" onClick="multi_add(7);">+7</div>
+				<div class="button add" onClick="multi_add(6);">+6</div>
+				<div class="button add" onClick="multi_add(5);">+5</div>
+				<div class="button add" onClick="multi_add(4);">+4</div>
+				<div class="button add" onClick="multi_add(3);">+3</div>
+				<div class="button add" onClick="multi_add(2);">+2</div>
+				<div class="button add" onClick="multi_add(1);">+1</div>
 				<span class="button" id="multi_reset" onClick="multi_reset();"></span>
 				<span class="button" id="multi_confirm" onClick="$('#multi_form').addClass('hidden');"></span>
 			</div>

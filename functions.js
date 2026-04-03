@@ -514,18 +514,54 @@
 		if(hand != parseInt($("#s_hand").val())){
 			$("#play #play_hand").removeClass("empty");
 			switch(hand){
-				case 1:	$("#play #play_hand #label").text("Carta más alta"); break;
-				case 2: $("#play #play_hand #label").text("Pareja"); break;
-				case 3: $("#play #play_hand #label").text("Doble pareja"); break;
-				case 4: $("#play #play_hand #label").text("Trío"); break;
-				case 5: $("#play #play_hand #label").text("Escalera"); break;
-				case 6: $("#play #play_hand #label").text("Color"); break;
-				case 7: $("#play #play_hand #label").text("Full"); break;
-				case 8: $("#play #play_hand #label").text("Póker"); break;
-				case 9: $("#play #play_hand #label").text("Esc. Color / Real"); break;
-				case 10: $("#play #play_hand #label").text("Repóker"); break;
-				case 11: $("#play #play_hand #label").text("Full de color"); break;
-				case 12: $("#play #play_hand #label").text("5 de color"); break;
+				case 1:
+					$("#play #play_hand #label").text("Carta más alta");
+					$("#play #play_hand #sample").html('<span class="black">&#127146;</span>');
+					break;
+				case 2:
+					$("#play #play_hand #label").text("Pareja");
+					$("#play #play_hand #sample").html('<span class="red">&#127173;</span><span class="black">&#127189;</span>');
+					break;
+				case 3:
+					$("#play #play_hand #label").text("Doble pareja");
+					$("#play #play_hand #sample").html('<span class="black">&#127145;</span><span class="red">&#127161;</span><span class="black">&#127188;</span><span class="red">&#127172;</span>');
+					break;
+				case 4:
+					$("#play #play_hand #label").text("Trío");
+					$("#play #play_hand #sample").html('<span class="red">&#127171;</span><span class="black">&#127139;</span><span class="red">&#127155;</span>');
+					break;
+				case 5:
+					$("#play #play_hand #label").text("Escalera");
+					$("#play #play_hand #sample").html('<span class="black">&#127190;</span><span class="red">&#127173;</span><span class="black">&#127140;</span><span class="red">&#127155;</span><span class="black">&#127186;</span>');
+					break;
+				case 6:
+					$("#play #play_hand #label").text("Color");
+					$("#play #play_hand #sample").html('<span class="red">&#127178;&#127175;&#127173;&#127171;&#127170;</span>');
+					break;
+				case 7:
+					$("#play #play_hand #label").text("Full");
+					$("#play #play_hand #sample").html('<span class="red">&#127175;</span><span class="black">&#127191;</span><span class="red">&#127159;</span><span class="black">&#127140;</span><span class="red">&#127156;</span>');
+					break;
+				case 8:
+					$("#play #play_hand #label").text("Póker");
+					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span>');
+					break;
+				case 9:
+					$("#play #play_hand #label").text("Esc. Color / Real");
+					$("#play #play_hand #sample").html('<span class="red">&#127153;&#127166;&#127165;&#127163;&#127162;</span>');
+					break;
+				case 10:
+					$("#play #play_hand #label").text("Repóker");
+					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span><span class="black">&#127137;</span>');
+					break;
+				case 11:
+					$("#play #play_hand #label").text("Full de color");
+					$("#play #play_hand #sample").html('<span class="red">&#127162;&#127162;&#127162;&#127156;&#127156;</span>');
+					break;
+				case 12:
+					$("#play #play_hand #label").text("5 de color");
+					$("#play #play_hand #sample").html('<span class="black">&#127137;&#127137;&#127137;&#127137;&#127137;</span>');
+					break;
 				default: break;
 			}
 			
@@ -542,6 +578,8 @@
 			
 			$("#points_form #points_string").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#points_form #points_confirm").text(points[hand] + inc_points[hand] * (level[hand] - 1));
+			$("#multi_form #multi_string").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
+			$("#multi_form #multi_confirm").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
 			
 			$("#hands_form #s_hand").val(hand);
 			save_game();
@@ -553,8 +591,9 @@
 		$("#points_string").append(" +" + inc);
 		$("#points_confirm").text(eval($("#points_string").text()));
 		
-		$("#play_points").text(eval($("#points_string").text()));
-		$("#play_confirm").text(eval($("#points_string").text()) * $("#play_multi").text());
+		$("#play_points").text($("#points_confirm").text());
+		
+		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
 	}
 	
 	function points_reset(){
@@ -579,8 +618,44 @@
 		}
 	}
 	
-	function open_multi_form(play){
+	function multi_add(inc){
+		$("#multi_string").append(" +" + inc);
+		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")));
 		
+		$("#play_multi").text($("#multi_confirm").text());
+		
+		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
+	}
+	
+	function multi_plus(inc){
+		$("#multi_string").text("(" + $("#multi_string").text() + ") x" + inc);
+		$("#multi_confirm").text(eval($("#multi_string").text().replaceAll("x", "*")));
+		
+		$("#play_multi").text($("#multi_confirm").text());
+		
+		$("#play_confirm").text($("#play_points").text() * $("#play_multi").text());
+	}
+	
+	function multi_reset(){
+		clearTimeout(timeout);
+		if(!$("#multi_reset").hasClass("active")){
+			refresh();
+			$("#multi_reset").addClass("active");
+			
+			timeout = setTimeout(function(){
+				$("#multi_reset").removeClass("active");
+			}, delay);
+		}
+		else{
+			var m = multi[parseInt($("#s_hand").val())] + inc_multi[parseInt($("#s_hand").val())] * (level[parseInt($("#s_hand").val())] - 1);
+			
+			$("#multi_string").text(m.toLocaleString());
+			$("#multi_confirm").text(m.toLocaleString());
+			
+			$("#play_multi").text(m.toLocaleString());
+			
+			$("multi_reset").removeClass("active");
+		}
 	}
 	
 	function play_reset(){
@@ -596,6 +671,7 @@
 		else{
 			$("#hands_form #s_hand").val(0);
 			
+			$("#play #play_hand #sample").text("");
 			$("#play #play_hand #label").text("");
 			$("#play #play_hand #level").text("");
 			$("#play #play_hand #plays").text("");
