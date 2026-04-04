@@ -61,13 +61,13 @@
 	input[type=radio]#header_config + label{ border-radius: 0 5px 5px 0; }
 	
 	input[type=radio]:checked + label, input[type=checkbox]:checked + label{
-		background-image: linear-gradient(#ff0000, #660000 50%);
-		border: 1px solid #660000;
+		background-image: linear-gradient(#ff0000, #990000 50%);
+		border: 1px solid #990000;
 		color: #eeeeee;
 	}
 	input[type=checkbox]:checked + label{
 		align-items: right;
-		background: url("checkbox_checked.png") 95% center / 6% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		background: url("checkbox_checked.png") 95% center / 6% no-repeat, linear-gradient(#ff0000, #990000 50%);
 	}
 	
 	input[type=radio]:disabled + label, input[type=checkbox]:disabled + label{ opacity: 0.25; }
@@ -80,8 +80,8 @@
 		font-size: 18px;
 		font-weight: bold;
 		color: #eeeeee;
-		background-image: linear-gradient(#ff0000, #660000 50%);
-		border: 1px solid #660000;
+		background-image: linear-gradient(#ff0000, #990000 50%);
+		border: 1px solid #990000;
 		border-radius: 6px;
 		opacity: 1;
 		transition: opacity 0.2s;
@@ -117,15 +117,25 @@
 	}
 	div#levels .hand.even{ background-color: #eeeeee; }
 	div#levels .hand.odd{}
-	div#levels .hand.active{ background-image: linear-gradient(#aaffaa, #44ff44 50%); }
+	div#levels .hand.active{ background-image: linear-gradient(#00dddd, #009999 50%); }
 	div#levels .hand span{
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 100%;
 	}
+	div#levels .hand .sample{
+		width: 38%;
+		font-size: 28px;
+		font-weight: bold;
+		opacity: 0.25;
+	}
+	div#levels .hand .sample span{ filter: drop-shadow(0 0 10px #eeeeee); }
+	div#levels .hand .sample span.red{ color: #ff0000; }
+	div#levels .hand .sample span.black{ color: #000000; }
 	div#levels .hand .label{
 		width: 38%;
+		margin-left: -38%;
 		font-size: 18px;
 		font-weight: bold;
 		text-shadow: -1px 0 1px #eeeeee,
@@ -136,21 +146,14 @@
 					1px -1px 1px #eeeeee,
 					0 -1px 1px #eeeeee,
 					-1px -1px 1px #eeeeee;
+		z-index: 1;
 	}
-	div#levels .hand .sample{
-		width: 38%;
-		margin-left: -38%;
-		font-size: 28px;
-		font-weight: bold;
-		opacity: 0.3;
-	}
-	div#levels .hand .sample span{}
-	div#levels .hand .sample span.red{ color: #ff0000; }
-	div#levels .hand .sample span.black{ color: #000000; }
+	
+
 	div#levels .hand .plays{ width: 6%; font-size: 12px; }
 	div#levels .hand .level{
 		width: 26%;
-		font-size: 18px;
+		font-size: 24px;
 		font-weight: bold;
 		opacity: 1;
 		transition: opacity 0.2s 0.2s;
@@ -174,7 +177,7 @@
 	
 	div#levels .hand .points, div#levels .hand .multi{
 		width: 15%;
-		font-size: 12px;
+		font-size: 18px;
 		font-weight: bold;
 		color: #eeeeee;
 		text-shadow: 1px 1px 2px #000000;
@@ -186,28 +189,30 @@
 	div#levels #levels_header{ height: 4%; padding-top: 0; padding-bottom: 0; margin-bottom: 1%; }
 	div#levels #levels_header span{
 		background-color: #cccccc;
-		font-size: 8px;
+		font-size: 9px;
 		font-weight: normal;
 		color: #000000;
 		text-shadow: none;
 		border-radius: 0; }
-	div#levels #levels_header .label{ width: 38%; }
+	div#levels #levels_header .label{ width: 38%; margin: 0; }
 	div#levels #levels_header .plays{}
 	div#levels #levels_header .level{}
 	div#levels #levels_header .points, div#levels #levels_header .multi{}
 	
-	div#levels .stats{
-		display: table;
-		margin-top: 3px;
+	div#levels div#stats{
+		display: grid;
 		width: 98%;
-		height: 2%;
+		height: 10%;
+		margin: 1% auto;
+		grid-template-columns: 40% 10% 40% 10%;
+		font-size: 12px;
 	}
-	div#levels .stats span{
-		display: table-cell;
-		vertical-align: middle;
+	div#levels div#stats span{
+		display: flex;
+		align-items: center;
 	}
-	div#levels .stats .label{	width: 38%; text-align: right; }
-	div#levels .stats .counter{ width: 12%; text-align: center; }
+	div#levels div#stats span.label{ justify-content: right; }
+	div#levels div#stats span.counter{ justify-content: center;font-weight: bold; }
 	
 	div#levels .levels_footer{
 		position: absolute;
@@ -251,7 +256,7 @@
 	div#levels #tokens .counter{ }
 	div#levels #tokens .counter.negative{ color: #ff0000; }
 	
-	div#levels #max_hands.active{ background-image: linear-gradient(#00dddd, #009999 50%); }
+	div#levels #max_hands.active{ background-image: linear-gradient(#00dd00, #009900 50%); }
 	div#levels #max_discards.active{ background-image: linear-gradient(#dddd00, #999900 50%); }
 	div#levels #tokens.active{ background-image: linear-gradient(#666666, #222222 50%); }
 
@@ -273,8 +278,7 @@
 		margin: 0 auto;
 		font-size: 12px;
 		font-weight: bold;
-		background-color: #000099;
-		color: white;
+		color: #eeeeee;
 	}
 	div#game div#game_header.small_blind{ background-color: #000099; }
 	div#game div#game_header.big_blind{ background-color: #990099; }
@@ -314,10 +318,7 @@
 		border-radius: 3px;
 		box-shadow: 2px 2px 3px #666666;
 	}
-	div#game div#played div.discard img{
-		max-height: 90%;
-		margin-right: 1%;
-	}
+	div#game div#played div.discard img{ max-height: 90%; margin-right: 1%; }
 	
 	div#game form{
 		position: relative;
@@ -352,9 +353,9 @@
 		display: grid;
 		grid-template-columns: 50% 50%;
 		grid-template-rows: 65% 35%;
-		background-image: linear-gradient(#aaffaa, #44ff44 50%);
+		background-image: linear-gradient(#00dddd, #009999 50%);
 		border-color: #44ff44; }
-	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#aaffaa, #44ff44 50%); }
+	div#game form #play_hand.empty{ background: url("hand.png") center center / 60% no-repeat, linear-gradient(#00dddd, #009999 50%); }
 	div#game form #play_hand span{
 		display: flex;
 		width: 100%;
@@ -402,8 +403,8 @@
 		border: 1px solid #999900;
 	}
 	div#game form #play_confirm{
-		background: url("confirm.png") 90% center / 20% no-repeat, linear-gradient(#00dddd, #009999 50%);
-		border: 1px solid #009999;
+		background: url("confirm.png") 90% center / 20% no-repeat, linear-gradient(#00dd00, #009900 50%);
+		border: 1px solid #009900;
 		font-size: 24px;
 		text-shadow: 1px 1px 2px #000000;
 	}
@@ -429,7 +430,7 @@
 		border-radius: 20px;
 		font-size: 12px;
 		font-weight: bold;
-		background-image: linear-gradient(#ff0000, #660000 50%);
+		background-image: linear-gradient(#ff0000, #990000 50%);
 		color: #eeeeee;
 	}
 	
@@ -486,11 +487,11 @@
 	div#game div#game_footer div span.buttons .button.disabled{ opacity: 0.25; }
 	
 	div#game div#game_footer div#dice{ background: url("die_button.png") center center / 25% no-repeat, linear-gradient(#eeeeee, #cccccc 50%); border: 1px solid #cccccc; }
-	div#game div#game_footer div#cards{ background-image: linear-gradient(#990099, #660066 50%); border: 1px solid #660066; }
+	div#game div#game_footer div#cards{ background-image: linear-gradient(#aa00aa, #660066 50%); border: 1px solid #660066; }
 	div#game div#game_footer div#cards span.icon{ background: url("deck.png") center / 50% no-repeat; }
 	div#game div#game_footer div#discards_left{ background-image: linear-gradient(#dddd00, #999900 50%); border: 1px solid #999900; }
 	div#game div#game_footer div#discards_left span.icon{ background: url("reject.png") center / 50% no-repeat; }
-	div#game div#game_footer div#hands_left{ background-image: linear-gradient(#00dddd, #009999 50%); border: 1px solid #009999; }
+	div#game div#game_footer div#hands_left{ background-image: linear-gradient(#00dd00, #009900 50%); border: 1px solid #009900; }
 	div#game div#game_footer div#hands_left span.icon{ background: url("confirm.png") center / 50% no-repeat; }
 	
 	div#game div#game_footer div.active{}
@@ -506,7 +507,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: auto auto auto;
+		grid-template-columns: repeat(3, 1fr);
 		grid-template-rows: auto auto auto auto;
 		grid-gap: 1%;
 		align-items: center;
@@ -589,7 +590,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
+		grid-template-columns: repeat(5, 1fr);;
 		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
@@ -639,7 +640,7 @@
 	div#game div#points_form span#points_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		filter: saturate(0.5);
 		transition: filter 0.2s;
 	}
@@ -660,7 +661,7 @@
 		height: 100%;
 		width: 33.34%;
 		display: grid;
-		grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
+		grid-template-columns: repeat(5, 1fr);;
 		grid-template-rows: 20% 20% 20% 20% 16%;
 		grid-gap: 1%;
 		align-items: center;
@@ -716,12 +717,12 @@
 	div#game div#multi_form span#multi_reset.button{
 		grid-row: 5;
 		grid-column: 1 / 3;
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		filter: saturate(0.5);
 		transition: filter 0.2s;
 	}
 	div#game div#multi_form span#multi_reset.button.active{
-		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #660000 50%);
+		background: url("undo.png") center center / 25% no-repeat, linear-gradient(#ff0000, #990000 50%);
 		filter: saturate(1);
 	}
 	div#game div#multi_form span#multi_confirm.button{
@@ -807,8 +808,8 @@
 		border: 1px solid #44ff44;
 	}
 	div#game div#dice_form div.die.active{
-		background: url("die_remove.png") center / 60% no-repeat, linear-gradient(#ff0000, #660000 50%) !important;
-		border: 1px solid #660000;
+		background: url("die_remove.png") center / 60% no-repeat, linear-gradient(#ff0000, #990000 50%) !important;
+		border: 1px solid #990000;
 	}
 	div#game div#dice_form div.die.rolling{ background-color: #aaaaaa !important; }
 	
@@ -902,7 +903,7 @@
 		width: 80%;
 		margin: 20% auto;
 		border-radius: 60px;
-		background-image: linear-gradient(#ff0000, #660000 50%);
+		background-image: linear-gradient(#ff0000, #990000 50%);
 		font-size: 18px;
 		font-weight: bold;
 		padding: auto;

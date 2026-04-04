@@ -121,14 +121,14 @@
 		$("#levels #max_discards .counter").text(max_discards);
 		$("#levels #tokens .counter").text(tokens);
 		
-		$("#levels .stats #played_hands").text(played_hands);
-		$("#levels .stats #not_played_hands").text(not_played_hands);
-		$("#levels .stats #played_discards").text(played_discards);
-		$("#levels .stats #not_played_discards").text(not_played_hands);
-		$("#levels .stats #defeated_blinds").text(defeated_blinds);
-		$("#levels .stats #not_defeated_blinds").text(not_defeated_blinds);
-		$("#levels .stats #added_cards").text(cards);
-		$("#levels .stats #increased_levels").text(increased_levels);
+		$("#levels #stats #played_hands").text(played_hands);
+		$("#levels #stats #not_played_hands").text(not_played_hands);
+		$("#levels #stats #played_discards").text(played_discards);
+		$("#levels #stats #not_played_discards").text(not_played_hands);
+		$("#levels #stats #defeated_blinds").text(defeated_blinds);
+		$("#levels #stats #not_defeated_blinds").text(not_defeated_blinds);
+		$("#levels #stats #added_cards").text(cards);
+		$("#levels #stats #increased_levels").text(increased_levels);
 		
 		$("#game #game_header #round").html("Ronda " + round);
 		refresh_game_header();
@@ -282,7 +282,7 @@
 			$("#hand_" + hand + " .level").text(level[hand]);
 			$("#hand_" + hand + " .points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
-			$("#increased_levels").text(increased_levels);
+			$("#stats #increased_levels").text(increased_levels);
 			
 			$("#s_hand_" + hand + " .points").text(points[hand] + inc_points[hand] * (level[hand] - 1));
 			$("#s_hand_" + hand + " .multi").text(multi[hand] + inc_multi[hand] * (level[hand] - 1));
@@ -338,7 +338,7 @@
 		}
 		else if((inc > 0) || (max_discards > 1)){
 			max_discards += inc;
-			if(max_discards == 1) $("#levels #max_discards .button.down").addClass("disabled");
+			if(!max_discards) $("#levels #max_discards .button.down").addClass("disabled");
 			else $("#levels #max_discards .button.down").removeClass("disabled");
 			$("#levels #max_discards .counter").text(max_discards);
 			
@@ -402,7 +402,7 @@
 			$("#game #game_footer #cards").removeAttr("onClick");
 			
 			$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
-			$("#levels #added_cards").text(cards);
+			$("#stats #added_cards").text(cards);
 			
 			$("#game #game_footer #cards").removeClass("active");
 			timeout = setTimeout(function(){
@@ -741,7 +741,7 @@
 					$("#game #play #play_discard").addClass("disabled");
 					$("#game_footer #discards_left .button.down").addClass("disabled");
 				}
-				$("#levels .stats #played_discards").text(played_discards);
+				$("#stats #played_discards").text(played_discards);
 				
 				$("#config .button").addClass("disabled");
 				$("#config #nofigures").prop("disabled", true);
