@@ -36,7 +36,7 @@
 			</div>
 			<div class="hand even" id="hand_12" onClick="change_level(12, 0);">
 				<span class="sample"><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span></span>
-				<span class="label" >5 de color</span>
+				<span class="label" >5 de Color</span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="buttons"><div class="button down" onClick="change_level(12, -1);">-</div><div class="button up" onClick="change_level(12, 1);">+</div></span>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="hand odd" id="hand_11" onClick="change_level(11, 0);">
 				<span class="sample"><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127156;</span><span class="red">&#127156;</span></span>
-				<span class="label">Full de color</span>
+				<span class="label">Full de Color</span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="buttons"><div class="button down" onClick="change_level(11, -1);">-</div><div class="button up" onClick="change_level(11, 1);">+</div></span>
@@ -63,7 +63,7 @@
 			</div>
 			<div class="hand odd" id="hand_9" onClick="change_level(9, 0);">
 				<span class="sample"><span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span></span>
-				<span class="label">Esc. color / Real</span>
+				<span class="label">Esc. Color / Real</span>
 				<span class="plays"></span>
 				<span class="level"></span>
 				<span class="buttons"><div class="button down" onClick="change_level(9, -1);">-</div><div class="button up" onClick="change_level(9, 1);">+</div></span>
@@ -165,11 +165,11 @@
 				<span class="counter" id="increased_levels"></span>
 			</div>
 			
-			<div class="levels_footer" id="max_hands" onClick="change_max_hands(0);">
-				<span class="label">Máx. manos</span>
-				<div class="button down" onClick="change_max_hands(-1);">-</div>
+			<div class="levels_footer" id="max_plays" onClick="change_max_plays(0);">
+				<span class="label">Máx. jugadas</span>
+				<div class="button down" onClick="change_max_plays(-1);">-</div>
 				<span class="counter"></span>
-				<div class="button up" onClick="change_max_hands(1);">+</div>
+				<div class="button up" onClick="change_max_plays(1);">+</div>
 			</div>
 			<div class="levels_footer" id="max_discards" onClick="change_max_discards(0);">
 				<span class="label">Máx. descartes</span>
@@ -224,23 +224,23 @@
 					<span class="counter"></span>
 					<span class="buttons"><div class="button down" onClick="change_discards(-1);">-</div><div class="button up" onClick="change_discards(1);">+</div></span>
 				</div>
-				<div id="hands_left" onClick="change_hands(0);">
+				<div id="plays_left" onClick="change_plays(0);">
 					<span class="icon"></span>
 					<span class="counter"></span>
-					<span class="buttons"><div class="button down" onClick="change_hands(-1);">-</div><div class="button up" onClick="change_hands(1);">+</div></span>
+					<span class="buttons"><div class="button down" onClick="change_plays(-1);">-</div><div class="button up" onClick="change_plays(1);">+</div></span>
 				</div>
 			</div>
 			
 			<div id="hands_form" class="hidden">
 				<input type="hidden" name="s_hand" id="s_hand" />
 				<div id="s_hand_12" onClick="select_hand(12);">
-					<span class="label">5 de color</span>
+					<span class="label">5 de Color</span>
 					<span class="sample"><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_11" onClick="select_hand(11);">
-					<span class="label">Full de color</span>
+					<span class="label">Full de Color</span>
 					<span class="sample"><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127156;</span><span class="red">&#127156;</span></span>
 					<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>
@@ -252,7 +252,7 @@
 					<span class="level"></span><span class="plays"></span>
 				</div>
 				<div id="s_hand_9" onClick="select_hand(9);">
-					<span class="label">Esc. Color / Real</span>
+					<span class="label">Esc. Col. / Real</span>
 					<span class="sample"><span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span></span>
 				<span class="points"></span><span class="multi"></span>
 					<span class="level"></span><span class="plays"></span>

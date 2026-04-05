@@ -23,11 +23,11 @@
 	
 	var level = new Array();
 	var plays = new Array();
-	var current_play;
-	var max_hands, max_discards;
-	var hands_left, discards_left;
+	var current_play, current_score;
+	var max_plays, max_discards;
+	var plays_left, discards_left;
 	var round, blind, goal;
-	var played_hands, not_played_hands;
+	var played_plays, not_played_plays;
 	var played_discards, not_played_discards;
 	var defeated_blinds, not_defeated_blinds;
 	var increased_levels;
@@ -55,16 +55,17 @@
 		//
 		//		CARGAR DATOS DESDE COOKIES
 			current_play = new Array(); // BORRAR
-			max_hands = 4;			// BORRAR
-			hands_left = max_hands;	// BORRAR
+			current_score = new Array(); // BORRAR
+			max_plays = 4;			// BORRAR
+			plays_left = max_plays;	// BORRAR
 			max_discards = 3;		// BORRAR
 			discards_left = max_discards;// BORRAR
 			round = 1;			// BORRAR
 			blind = 1;				// BORRAR
 			goal = 300;				// BORRAR
 			total_points = 0;		// BORRAR
-			played_hands = 0;		// BORRAR
-			not_played_hands = 0;	// BORRAR
+			played_plays = 0;		// BORRAR
+			not_played_plays = 0;	// BORRAR
 			played_discards = 0;	// BORRAR
 			not_played_discards = 0;// BORRAR
 			defeated_blinds = 0;	// BORRAR
@@ -87,15 +88,16 @@
 		}
 		else{
 			current_play = new Array();
-			max_hands = 4;
-			hands_left = max_hands;
+			current_score = new Array();
+			max_plays = 4;
+			plays_left = max_plays;
 			max_discards = 3;
 			discards_left = max_discards;
 			round = 1;
 			blind = 1;
 			goal = 300;
-			played_hands = 0;
-			not_played_hands = 0;
+			played_plays = 0;
+			not_played_plays = 0;
 			played_discards = 0;
 			not_played_discards = 0;
 			defeated_blinds = 0;
@@ -126,14 +128,14 @@
 			$("#hands_form #s_hand_" + i + " .plays").text(plays[i]);
 		}
 		
-		$("#levels #max_hands .counter").text(max_hands);
+		$("#levels #max_plays .counter").text(max_plays);
 		$("#levels #max_discards .counter").text(max_discards);
 		$("#levels #tokens .counter").text(tokens);
 		
-		$("#levels #stats #played_hands").text(played_hands);
-		$("#levels #stats #not_played_hands").text(not_played_hands);
+		$("#levels #stats #played_plays").text(played_plays);
+		$("#levels #stats #not_played_plays").text(not_played_plays);
 		$("#levels #stats #played_discards").text(played_discards);
-		$("#levels #stats #not_played_discards").text(not_played_hands);
+		$("#levels #stats #not_played_discards").text(not_played_plays);
 		$("#levels #stats #defeated_blinds").text(defeated_blinds);
 		$("#levels #stats #not_defeated_blinds").text(not_defeated_blinds);
 		$("#levels #stats #added_cards").text(cards);
@@ -161,7 +163,7 @@
 		
 		$("#game #game_footer #cards .counter").text((nofigures ? 40 : 52) + cards);
 		$("#game #game_footer #discards_left .counter").text(discards_left);
-		$("#game #game_footer #hands_left .counter").text(hands_left);
+		$("#game #game_footer #plays_left .counter").text(plays_left);
 		enable($("#game #game_footer .button"));
 		$("#hands_form #s_hand").val(0);
 		
@@ -187,7 +189,7 @@
 	}
 	
 	function new_game(){
-		if((played_hands) || (played_discards)){
+		if((played_plays) || (played_discards)){
 			if(confirm("Esto borrará la partida en curso. ¿Continuar?")){
 				//
 				//	PRIMERO: BORRAR COOKIES
@@ -335,33 +337,33 @@
 		}
 	}
 	
-	function change_max_hands(inc){
+	function change_max_plays(inc){
 		clearTimeout(timeout);
-		if(!$("#levels #max_hands").hasClass("active")){
+		if(!$("#levels #max_plays").hasClass("active")){
 			refresh();
-			activate($("#levels #max_hands"));
+			activate($("#levels #max_plays"));
 		}
-		else if((inc > 0) || (max_hands > 1)){
-			max_hands += inc;
-			if(max_hands == 1) disable($("#levels #max_hands .button.down"));
-			else enable($("#levels #max_hands .button.down"));
-			$("#levels #max_hands .counter").text(max_hands);
+		else if((inc > 0) || (max_plays > 1)){
+			max_plays += inc;
+			if(max_plays == 1) disable($("#levels #max_plays .button.down"));
+			else enable($("#levels #max_plays .button.down"));
+			$("#levels #max_plays .counter").text(max_plays);
 			
-			if(hands_left){
-				hands_left += inc;
-				if(!hands_left){
+			if(plays_left){
+				plays_left += inc;
+				if(!plays_left){
 					disable($("#game #play #play_confirm"));
-					disable($("#game #game_footer #hands_left .button.down"));
+					disable($("#game #game_footer #plays_left .button.down"));
 				}
 				else{
 					enable($("#game #play #play_confirm"));
-					enable($("#game #game_footer #hands_left .button.down"));
+					enable($("#game #game_footer #plays_left .button.down"));
 				}
-				$("#game #game_footer #hands_left .counter").text(hands_left);
+				$("#game #game_footer #plays_left .counter").text(plays_left);
 			}
 		}
 		
-		timeout = setTimeout(function(){ deactivate($("#levels #max_hands")); }, delay);
+		timeout = setTimeout(function(){ deactivate($("#levels #max_plays")); }, delay);
 		
 		save_game();
 	}
@@ -439,33 +441,33 @@
 		}
 	}
 	
-	function change_hands(inc){
+	function change_plays(inc){
 		clearTimeout(timeout);
-		if((!$("#game_footer #hands_left").hasClass("active")) || (!inc)){
+		if((!$("#game_footer #plays_left").hasClass("active")) || (!inc)){
 			refresh();
-			activate($("#game_footer #hands_left"));
+			activate($("#game_footer #plays_left"));
 			
-			timeout = setTimeout(function(){ deactivate($("#game_footer #hands_left")); }, delay);
+			timeout = setTimeout(function(){ deactivate($("#game_footer #plays_left")); }, delay);
 		}
-		else if((inc > 0) || (hands_left)){
-			hands_left += inc;
+		else if((inc > 0) || (plays_left)){
+			plays_left += inc;
 			
-			if(!hands_left){
+			if(!plays_left){
 				disable($("#game #play #play_confirm"));
-				disable($("#game #game_footer #hands_left .button.down"));
+				disable($("#game #game_footer #plays_left .button.down"));
 				$("#game form").addClass("hidden");
 			}
 			else{
 				if(parseInt($("#s_hand").val())) enable($("#game #play #play_confirm"));
-				enable($("#game #game_footer #hands_left .button.down"));
+				enable($("#game #game_footer #plays_left .button.down"));
 				$("#game form").removeClass("hidden");
 			}
 			
-			$("#game #game_footer #hands_left").removeAttr("onClick");
-			$("#game #game_footer #hands_left .counter").text(hands_left);
-			deactivate($("#game #game_footer #hands_left"));
+			$("#game #game_footer #plays_left").removeAttr("onClick");
+			$("#game #game_footer #plays_left .counter").text(plays_left);
+			deactivate($("#game #game_footer #plays_left"));
 			
-			setTimeout(function(){ $("#game #game_footer #hands_left").attr("onClick", "change_hands(0);"); }, 1);
+			setTimeout(function(){ $("#game #game_footer #plays_left").attr("onClick", "change_plays(0);"); }, 1);
 			save_game();
 		}
 	}
@@ -500,7 +502,7 @@
 	}
 	
 	function change_suddeath(inc){
-		if((!played_hands) && (!played_discards)){
+		if((!played_plays) && (!played_discards)){
 			if(((inc < 0) && (suddeath > 1)) || ((inc > 0) && (suddeath < 12))) suddeath += inc;
 			if((inc < 0) && (suddeath == 1)) disable($("#config .button.down"));
 			else if ((inc > 0) && (suddeath == 12)) disable($("#config .button.up"));
@@ -576,7 +578,7 @@
 					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span>');
 					break;
 				case 9:
-					$("#play #play_hand #label").text("Esc. Color / Real");
+					$("#play #play_hand #label").text("Esc. Col. / Real");
 					$("#play #play_hand #sample").html('<span class="red">&#127153;</span><span class="red">&#127166;</span><span class="red">&#127165;</span><span class="red">&#127163;</span><span class="red">&#127162;</span>');
 					break;
 				case 10:
@@ -584,11 +586,11 @@
 					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="red">&#127153;</span><span class="black">&#127185;</span><span class="red">&#127169;</span><span class="black">&#127137;</span>');
 					break;
 				case 11:
-					$("#play #play_hand #label").text("Full de color");
+					$("#play #play_hand #label").text("Full de Color");
 					$("#play #play_hand #sample").html('<span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127162;</span><span class="red">&#127156;</span><span class="red">&#127156;</span>');
 					break;
 				case 12:
-					$("#play #play_hand #label").text("5 de color");
+					$("#play #play_hand #label").text("5 de Color");
 					$("#play #play_hand #sample").html('<span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span><span class="black">&#127137;</span>');
 					break;
 				default: break;
@@ -698,6 +700,50 @@
 		}
 	}
 	
+	function refresh_score(){
+		if(!current_play[current_play.length - 1]){
+			$("#game #played").append("<div class='discard'><span class='label'>Descarte</span><span class='score'></span></div>");
+			$("#game #played .discard").animate({ height: "32px" }, 250);
+			
+			deactivate($("#play #play_discard"));
+			$("#game_footer #discards_left .counter").text(discards_left);
+			if(!discards_left){
+				disable($("#game #play #play_discard"));
+				disable($("#game_footer #discards_left .button.down"));
+			}
+			$("#stats #played_discards").text(played_discards);
+			
+			disable($("#config .button"));
+			$("#config #nofigures").prop("disabled", true);
+			$("#config #balanced").prop("disabled", true);
+		}
+		else{
+			var label;
+			switch(current_play[current_play.length - 1]){
+				case 1: label = "Carta más alta"; break;
+				case 2: label = "Pareja"; break;
+				case 3: label = "Doble Pareja"; break;
+				case 4: label = "Trío"; break;
+				case 5: label = "Escalera"; break;
+				case 6: label = "Color"; break;
+				case 7: label = "Full"; break;
+				case 8: label = "Póker"; break;
+				case 9: label = "Escalera de Color / Real"; break;
+				case 10: label = "Repóker"; break;
+				case 11: label = "Full de Color"; break;
+				case 12: label = "5 de Color"; break;
+				default: break;
+			}
+			$("#game #played").append("<div class='play'><span class='label'>" + label + "</span><span class='score'>" + current_score[current_score.length - 1].toLocaleString() + "</span></div>");
+			$("#game #played .play").animate({ height: "32px" }, 250);
+			
+			
+			
+			
+			
+		}
+	}
+	
 	function play_reset(){
 		if(parseInt($('#s_hand').val())){
 			clearTimeout(timeout);
@@ -742,30 +788,18 @@
 			}
 			else{
 				current_play[current_play.length] = 0;
+				current_score[current_score.length] = 0;
 				played_discards++;
 				discards_left--;
 				
-				$("#game #played").append("<div class='discard'><img src='reject.png' />Descarte</div>");
-				$("#game #played .discard").animate({ height: "18px" }, 250);
-				
-				deactivate($("#play #play_discard"));
-				$("#game_footer #discards_left .counter").text(discards_left);
-				if(!discards_left){
-					disable($("#game #play #play_discard"));
-					disable($("#game_footer #discards_left .button.down"));
-				}
-				$("#stats #played_discards").text(played_discards);
-				
-				disable($("#config .button"));
-				$("#config #nofigures").prop("disabled", true);
-				$("#config #balanced").prop("disabled", true);
+				refresh_score();
 				save_game();
 			}
 		}
 	}
 	
 	function play_confirm(){
-		if((hands_left) && (parseInt($("#s_hand").val()))){
+		if((plays_left) && (parseInt($("#s_hand").val()))){
 			clearTimeout(timeout);
 			if(!$("#play #play_confirm").hasClass("active")){
 				refresh();
@@ -814,11 +848,21 @@
 				}, delay);
 			}
 			else{
+				current_play[current_play.length] = parseInt($("#s_hand").val());
+				current_score[current_score.length] = get_score();
+				played_plays++;
+				plays_left--;
+				
+				if((boss == "level_down") && (level[parseInt($("#s_hand").val())] > 1)){
+					activate($("#levels #hand_" + parseInt($("#s_hand").val())));
+					change_level(parseInt($("#s_hand").val()), -1);
+				}
+				
+				activate($("#play_reset"));
+				play_reset();
 			
-			
-			
-			
-				deactivate($("#play #play_confirm"));
+				refresh_score();
+				
 				save_game();
 			}
 		}
